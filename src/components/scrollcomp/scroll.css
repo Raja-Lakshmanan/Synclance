@@ -1,0 +1,29 @@
+.reveal-wrapper {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem; /* Better control over word spacing */
+}
+
+.reveal-word {
+  position: relative;
+  display: inline-block;
+  line-height: 1.3;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.base-word {
+  color: rgb(39, 39, 40);
+}
+
+.highlight-word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(90deg, white, darkgray, white, gray, white);
+  -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}

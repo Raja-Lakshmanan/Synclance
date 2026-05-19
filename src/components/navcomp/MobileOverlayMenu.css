@@ -1,0 +1,164 @@
+.mobile-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 90px 18px 30px;
+    box-sizing: border-box;
+    background:
+        radial-gradient(circle at 50% 24%, rgba(255,255,255,0.1), transparent 18rem),
+        rgba(0,0,0,0.68);
+    backdrop-filter: blur(12px);
+}
+
+.mobile-overlay-panel{
+    position: relative;
+    width: min(86vw, 360px);
+    max-height: calc(100vh - 130px);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 24px;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035)),
+        rgba(18,18,18,0.78);
+    box-shadow:
+        0 24px 70px rgba(0,0,0,0.55),
+        inset 0 1px 8px rgba(255,255,255,0.08),
+        0 0 28px rgba(192,192,192,0.08);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.mobile-overlay-controls{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.mobile-overlay-close,
+.mobile-sound-toggle{
+    position: relative;
+    top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255,255,255,0.045);
+    color: #f6f6f6;
+    cursor: pointer;
+    font-size: 22px;
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.mobile-overlay-close:hover,
+.mobile-overlay-close:focus-visible,
+.mobile-sound-toggle:hover,
+.mobile-sound-toggle:focus-visible{
+    outline: none;
+    transform: translateY(-1px);
+    border-color: silver;
+    background: linear-gradient(90deg, #ffffff, #bdbdbd);
+    color: #080808;
+}
+
+.mobile-overlay-links{
+    display: grid;
+    gap: 12px;
+}
+
+.mobile-overlay-links a{
+    position: relative;
+    top: auto;
+    transform: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    color: #f5f5f5;
+    text-decoration: none;
+    border: 1px solid transparent;
+    background: rgba(255,255,255,0.025);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mobile-overlay-links a strong{
+    position: relative;
+    width: fit-content;
+    font-size: clamp(18px, 5vw, 22px);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.2;
+}
+
+.mobile-overlay-links a strong::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, #ffffff, silver);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+}
+
+.mobile-overlay-links a:hover,
+.mobile-overlay-links a:focus-visible{
+    outline: none;
+    transform: translateX(3px);
+    border-color: rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.065);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.24), inset 0 1px 4px rgba(255,255,255,0.06);
+}
+
+.mobile-overlay-links a:hover strong::after,
+.mobile-overlay-links a:focus-visible strong::after,
+.mobile-overlay-links a.active strong::after{
+    transform: scaleX(1);
+}
+
+.mobile-overlay-links a.active{
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.18);
+    background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.028));
+    box-shadow: inset 0 1px 5px rgba(255,255,255,0.05);
+}
+
+@media (max-width: 767px){
+    .mobile-overlay{
+        display: flex;
+    }
+}
+
+@media (max-width: 420px){
+    .mobile-overlay{
+        padding: 88px 12px 28px;
+    }
+
+    .mobile-overlay-panel{
+        width: min(88vw, 340px);
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+
+    .mobile-overlay-links{
+        gap: 8px;
+    }
+
+    .mobile-overlay-links a{
+        min-height: 46px;
+        padding: 12px 14px;
+    }
+}

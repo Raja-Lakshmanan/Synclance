@@ -1,0 +1,24 @@
+.contact{
+    height: 100vh;
+    width: 100%;
+    padding: 0 4%;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), transparent 46%);
+}
+.fline h1{
+    background: linear-gradient(90deg,white,darkgray );
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: clamp(48px, 7vw, 78px);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+}
+.fline{
+    display: flex;
+    gap: 17px;
+    align-items: flex-end;
+    height: 28%;
+    max-width: 1180px;
+    margin: 0 auto;
+}

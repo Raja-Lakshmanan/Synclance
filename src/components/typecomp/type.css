@@ -1,0 +1,29 @@
+.type{
+    color: white;
+    display: flex;
+    height: 50vh;
+    font-size: clamp(7px, 1vw, 10px);
+    align-items: flex-start;
+    flex-wrap: wrap;
+    max-width: 92vw;
+}
+.dev{
+    background: linear-gradient(90deg,white, darkgray , whitesmoke , gray, white);
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+    font-family: inherit;
+    font-style: italic;
+    letter-spacing: 0;
+    background-size: 200% 200%;
+    animation: waveMove 3s linear infinite;
+}
+@keyframes waveMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
