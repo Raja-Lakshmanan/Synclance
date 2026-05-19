@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PiMailboxFill } from "react-icons/pi";
 import "./nav.css";
 import logo from "./l1.png";
+import design1 from "../../assets/design/design1.png";
 
 const navLinks = [
   { href: "#home", label: "Home", id: "home" },
@@ -43,6 +44,14 @@ const Nav = () => {
     };
   }, [isOpen]);
 
+  const openMenu = () => {
+    setIsOpen(true);
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
       <header className="aixor-nav">
@@ -77,7 +86,7 @@ const Nav = () => {
 
           <button
             className={`aixor-menu-btn ${isOpen ? "open" : ""}`}
-            onClick={() => setIsOpen(true)}
+            onClick={openMenu}
             aria-label="Open menu"
           >
             <span></span>
@@ -88,46 +97,32 @@ const Nav = () => {
       </header>
 
       {isOpen && (
-        <div className="aixor-mobile-overlay">
-          <button
-            className="aixor-overlay-bg"
-            onClick={() => setIsOpen(false)}
-            aria-label="Close menu background"
-          ></button>
+        <div className="agency-mobile-menu" role="dialog" aria-modal="true">
+          <div className="agency-mobile-top">
+            <img src={logo} alt="Tamiztron Logo" />
+            <button
+              className="agency-close-btn"
+              onClick={closeMenu}
+              aria-label="Close menu"
+            >
+              &times;
+            </button>
+          </div>
 
-          <div className="aixor-mobile-panel">
-            <div className="aixor-mobile-top">
-              <img src={logo} alt="Tamiztron Logo" />
-              <button
-                className="aixor-close-btn"
-                onClick={() => setIsOpen(false)}
-                aria-label="Close menu"
+          <img src={design1} className="agency-menu-visual" alt="Design visual" />
+
+          <div className="agency-mobile-links">
+            {navLinks.map((link, index) => (
+              <a
+                key={link.id}
+                href={link.href}
+                className={activeSection === link.id ? "active" : ""}
+                onClick={closeMenu}
+                style={{ "--delay": `${0.14 + index * 0.08}s` }}
               >
-                ×
-              </button>
-            </div>
-
-            <div className="aixor-mobile-links">
-              {navLinks.map((link, index) => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  className={activeSection === link.id ? "active" : ""}
-                  onClick={() => setIsOpen(false)}
-                  style={{ "--delay": `${index * 0.08}s` }}
-                >
-                  <span>0{index + 1}</span>
-                  {link.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="aixor-mobile-footer">
-              <a href="tel:+917639077992">(+91) 76390 77992</a>
-              <a href="mailto:rajalakshmanan807@gmail.com">
-                rajalakshmanan807@gmail.com
+                {link.label}
               </a>
-            </div>
+            ))}
           </div>
         </div>
       )}

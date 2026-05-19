@@ -40,11 +40,29 @@ const categories = ["All", "Design", "Projects", "Development", "Editing"];
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [activeServiceId, setActiveServiceId] = useState(null);
 
   const filteredServices =
     activeCategory === "All"
       ? servicesData
       : servicesData.filter((service) => service.category === activeCategory);
+
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    setActiveServiceId(null);
+  };
+
+  const toggleService = (serviceId) => {
+    setActiveServiceId((currentId) => (currentId === serviceId ? null : serviceId));
+  };
+
+  const handleServiceKeyDown = (event, serviceId) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleService(serviceId);
+    }
+  };
+
   return (
     <section className="projects" id='projects'>
       <br />
@@ -61,7 +79,7 @@ const Projects = () => {
             className={`category-btn ${
               activeCategory === cat ? "active" : ""
             }`}
-            onClick={() => setActiveCategory(cat)}
+            onClick={() => handleCategoryChange(cat)}
           >
             {cat}
           </button>
@@ -71,15 +89,20 @@ const Projects = () => {
         {filteredServices.map((service, index) => (
           <motion.div
             key={service.id}
-            className="service-card"
+            className={`service-card ${activeServiceId === service.id ? "active" : ""}`}
+            role="button"
+            tabIndex={0}
+            aria-expanded={activeServiceId === service.id}
+            onClick={() => toggleService(service.id)}
+            onKeyDown={(event) => handleServiceKeyDown(event, service.id)}
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: index * 0.04, ease: "easeOut" }}
           >
-            <h1 className='ico'>{service.icon}</h1>
-            <h3>{service.title}</h3>
-            <p className='des'>{service.description}</p>
+            <h1 className='ico service-icon'>{service.icon}</h1>
+            <h3 className='service-title'>{service.title}</h3>
+            <p className='des service-description'>{service.description}</p>
           </motion.div>
         ))}
       </div>

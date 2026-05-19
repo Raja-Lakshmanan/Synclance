@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaWhatsapp, FaInstagram } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 import { IoClose, IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import './FloatingContact.css'
@@ -21,11 +21,17 @@ const contactLinks = [
     href: "mailto:youremail@gmail.com",
     icon: <MdOutlineMail />,
   },
+  {
+    label: "Phone",
+    href: "tel:+917639077992",
+    icon: <FaPhoneAlt />,
+  },
 ]
 
 const FloatingContact = () => {
   const [open, setOpen] = useState(false)
   const contactRef = useRef(null)
+  const opensInCurrentContext = (href) => href.startsWith('mailto:') || href.startsWith('tel:')
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -53,11 +59,11 @@ const FloatingContact = () => {
               <motion.a
                 key={item.label}
                 href={item.href}
-                target={item.href.startsWith('mailto:') ? undefined : "_blank"}
-                rel={item.href.startsWith('mailto:') ? undefined : "noreferrer"}
+                target={opensInCurrentContext(item.href) ? undefined : "_blank"}
+                rel={opensInCurrentContext(item.href) ? undefined : "noreferrer"}
                 className='floating-contact-item'
-                aria-label={`Open ${item.label}`}
-                title={item.label}
+                aria-label={item.label === "Phone" ? "Call us" : `Open ${item.label}`}
+                title={item.label === "Phone" ? "Call us" : item.label}
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
