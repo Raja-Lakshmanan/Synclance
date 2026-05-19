@@ -3,6 +3,8 @@ import { PiMailboxFill } from "react-icons/pi";
 import "./nav.css";
 import logo from "./l1.png";
 import design1 from "../../assets/design/design1.png";
+import SoundToggle from "../sound/SoundToggle";
+import { playUiSound } from "../../utils/sound";
 
 const navLinks = [
   { href: "#home", label: "Home", id: "home" },
@@ -60,17 +62,19 @@ const Nav = () => {
   }, [isOpen]);
 
   const openMenu = () => {
+    playUiSound("open");
     setIsOpen(true);
   };
 
   const closeMenu = () => {
+    playUiSound("close");
     setIsOpen(false);
   };
 
   return (
     <>
       <header className="aixor-nav">
-        <a href="#home" className="aixor-logo" aria-label="Go to home">
+        <a href="#home" className="aixor-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
           <img src={logo} alt="Tamiztron Logo" />
         </a>
 
@@ -80,6 +84,7 @@ const Nav = () => {
               key={link.id}
               href={link.href}
               className={activeSection === link.id ? "active" : ""}
+              onClick={() => playUiSound("click")}
             >
               {link.label}
             </a>
@@ -87,7 +92,7 @@ const Nav = () => {
         </nav>
 
         <div className="aixor-right">
-          <a href="tel:+917639077992" className="aixor-phone">
+          <a href="tel:+917639077992" className="aixor-phone" onClick={() => playUiSound("click")}>
             (+91) 76390 77992
           </a>
 
@@ -95,9 +100,12 @@ const Nav = () => {
             href="mailto:rajalakshmanan807@gmail.com"
             className="aixor-mail"
             aria-label="Send email"
+            onClick={() => playUiSound("click")}
           >
             <PiMailboxFill />
           </a>
+
+          <SoundToggle />
 
           <button
             className={`aixor-menu-btn ${isOpen ? "open" : ""}`}

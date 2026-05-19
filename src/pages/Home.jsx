@@ -4,6 +4,7 @@ import TypingText from '../components/typecomp/type'
 import { GoArrowUpRight } from "react-icons/go";
 import vid from '../components/navcomp/hero-video.mp4'
 import {motion} from 'framer-motion'
+import { playUiSound } from '../utils/sound'
 const Home = () => {
   return (
     <motion.section
@@ -28,7 +29,7 @@ const Home = () => {
             <h2 className='q1'>Technology</h2>
             <h2 className='q2'>Meets Creativity</h2>
           </div>
-          <a href="#contact"><button className='btn'>Let's Connect<GoArrowUpRight className='arrow'/></button></a>
+          <a href="#contact" onClick={() => playUiSound("click")}><button className='btn'>Let's Connect<GoArrowUpRight className='arrow'/></button></a>
         </motion.div>
     </motion.section>
   )

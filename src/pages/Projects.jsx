@@ -18,6 +18,7 @@ import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import { IoLogoCodepen } from "react-icons/io";
 import { BsCameraReels } from "react-icons/bs";
 import { motion } from 'framer-motion'
+import { playUiSound } from '../utils/sound'
 
 const servicesData = [
   { id: 1, icon:<FaUikit/>,title: "UI/UX Design", category: "Design", description:"Create modern, user-friendly interfaces with clean layouts, smooth navigation, and a great user experience tailored to your business needs." },
@@ -53,11 +54,13 @@ const Projects = () => {
       : servicesData.filter((service) => service.category === activeCategory);
 
   const handleCategoryChange = (cat) => {
+    playUiSound("click");
     setActiveCategory(cat);
     setActiveServiceId(null);
   };
 
   const toggleService = (serviceId) => {
+    playUiSound("click");
     setActiveServiceId((currentId) => (currentId === serviceId ? null : serviceId));
   };
 

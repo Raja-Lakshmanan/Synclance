@@ -4,6 +4,7 @@ import { FaWhatsapp, FaInstagram, FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 import { IoClose, IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import './FloatingContact.css'
+import { playUiSound } from '../../utils/sound'
 
 const contactLinks = [
   {
@@ -68,7 +69,10 @@ const FloatingContact = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ duration: 0.2, delay: index * 0.04, ease: "easeOut" }}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  playUiSound("click")
+                  setOpen(false)
+                }}
               >
                 <span className='floating-contact-icon'>{item.icon}</span>
                 <span>{item.label}</span>
@@ -81,7 +85,10 @@ const FloatingContact = () => {
       <button
         className={`floating-contact-main ${open ? "open" : ""}`}
         type='button'
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => {
+          playUiSound(open ? "close" : "open")
+          setOpen((value) => !value)
+        }}
         aria-label={open ? "Close contact options" : "Open contact options"}
         aria-expanded={open}
         title={open ? "Close contact options" : "Contact"}

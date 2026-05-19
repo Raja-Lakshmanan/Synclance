@@ -4,6 +4,7 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FiMail, FiPhone } from "react-icons/fi";
 import logo from "../navcomp/l1.png";
 import "./footer.css";
+import { playUiSound } from "../../utils/sound";
 
 const quickLinks = [
   { label: "Home", href: "#home" },
@@ -55,7 +56,7 @@ const Footer = () => {
     >
       <div className="footer-inner">
         <div className="footer-brand">
-          <a href="#home" className="footer-logo" aria-label="Go to home">
+          <a href="#home" className="footer-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
             <img src={logo} alt="Tamiztron Logo" />
             <span>Tamiztron</span>
           </a>
@@ -69,6 +70,7 @@ const Footer = () => {
                 title={link.label}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                onClick={() => playUiSound("click")}
               >
                 {link.icon}
               </a>
@@ -79,7 +81,7 @@ const Footer = () => {
         <nav className="footer-column" aria-label="Footer quick links">
           <h3>Quick Links</h3>
           {quickLinks.map((link) => (
-            <a key={link.label} href={link.href}>
+            <a key={link.label} href={link.href} onClick={() => playUiSound("click")}>
               {link.label}
             </a>
           ))}
@@ -94,8 +96,8 @@ const Footer = () => {
 
         <address className="footer-column footer-contact">
           <h3>Contact</h3>
-          <a href="tel:+917639077992">Phone</a>
-          <a href="mailto:rajalakshmanan807@gmail.com">Email</a>
+          <a href="tel:+917639077992" onClick={() => playUiSound("click")}>Phone</a>
+          <a href="mailto:rajalakshmanan807@gmail.com" onClick={() => playUiSound("click")}>Email</a>
         </address>
       </div>
 

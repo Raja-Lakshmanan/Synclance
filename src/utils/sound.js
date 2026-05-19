@@ -7,12 +7,13 @@ const SOUND_PATHS = {
 }
 
 const FALLBACK_TONES = {
-  open: { frequency: 520, duration: 0.07 },
-  close: { frequency: 320, duration: 0.06 },
-  click: { frequency: 430, duration: 0.045 },
+  open: { frequency: 520, duration: 0.06 },
+  close: { frequency: 320, duration: 0.055 },
+  click: { frequency: 430, duration: 0.04 },
 }
 
 let audioContext
+const audioCache = {}
 
 export const isSoundEnabled = () => {
   if (typeof window === 'undefined') return false
@@ -36,7 +37,7 @@ const playFallbackTone = (type) => {
   oscillator.type = 'sine'
   oscillator.frequency.setValueAtTime(tone.frequency, audioContext.currentTime)
   gain.gain.setValueAtTime(0.0001, audioContext.currentTime)
-  gain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 0.01)
+  gain.gain.exponentialRampToValueAtTime(0.028, audioContext.currentTime + 0.01)
   gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + tone.duration)
 
   oscillator.connect(gain)
@@ -49,8 +50,11 @@ export const playUiSound = (type = 'click') => {
   if (typeof window === 'undefined' || !isSoundEnabled()) return
 
   const soundPath = SOUND_PATHS[type] || SOUND_PATHS.click
-  const audio = new Audio(soundPath)
-  audio.volume = 0.16
+  audioCache[type] = audioCache[type] || new Audio(soundPath)
+  const audio = audioCache[type]
+
+  audio.volume = 0.2
+  audio.currentTime = 0
 
   audio.play().catch(() => {
     playFallbackTone(type)

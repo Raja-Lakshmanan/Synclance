@@ -4,6 +4,7 @@ import { RiTeamLine } from "react-icons/ri";
 import { FiMail, FiPhone, FiPlus } from "react-icons/fi";
 import ScrollRevealText from '../components/scrollcomp/ScrollRevealText';
 import { motion } from 'framer-motion';
+import { playUiSound } from '../utils/sound';
 
 const memberImages = import.meta.glob("../assets/members/*.{png,jpg,jpeg,webp}", {
   eager: true,
@@ -72,6 +73,11 @@ const members = [
 const googleFormLink = "https://forms.gle/YOUR_GOOGLE_FORM_LINK";
 
 const About = () => {
+  const handleMemberCardClick = (event) => {
+    if (event.target.closest("a")) return;
+    playUiSound("click");
+  };
+
   return (
     <motion.section
       className='about reveal-section'
@@ -102,6 +108,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
+              onClick={handleMemberCardClick}
             >
               <div className="member-image-wrap">
                 <img className="member-image" src={member.image} alt={member.name} />
@@ -110,11 +117,11 @@ const About = () => {
                 <h3 className="member-name">{member.name}</h3>
                 <p className="member-role">{member.role}</p>
                 <div className="member-contact">
-                  <a className="member-link" href={`tel:${member.phone}`} aria-label={`Call ${member.name}`}>
+                  <a className="member-link" href={`tel:${member.phone}`} aria-label={`Call ${member.name}`} onClick={() => playUiSound("click")}>
                     <FiPhone />
                     <span>{member.phone}</span>
                   </a>
-                  <a className="member-link" href={createMailLink(member.email)} aria-label={`Email ${member.name}`}>
+                  <a className="member-link" href={createMailLink(member.email)} aria-label={`Email ${member.name}`} onClick={() => playUiSound("click")}>
                     <FiMail />
                     <span>{member.email}</span>
                   </a>
@@ -129,6 +136,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: members.length * 0.05, ease: "easeOut" }}
+            onClick={handleMemberCardClick}
           >
             <div className="apply-plus" aria-hidden="true">
               <FiPlus />
@@ -141,6 +149,7 @@ const About = () => {
                 href={googleFormLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => playUiSound("click")}
               >
                 Apply
               </a>
