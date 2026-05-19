@@ -1,7 +1,9 @@
 .sound-toggle{
-  width: 42px;
+  min-width: 104px;
   height: 42px;
-  border-radius: 50%;
+  padding: 0 13px;
+  gap: 8px;
+  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17,6 +19,13 @@
   cursor: pointer;
 }
 
+.sound-toggle span{
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .sound-toggle:hover{
   border-color: rgba(255,255,255,0.32);
   background: rgba(255,255,255,0.12);
@@ -25,8 +34,14 @@
 @media (max-width: 980px){
   .sound-toggle{
     width: 46px;
+    min-width: 46px;
     height: 46px;
+    padding: 0;
     border-radius: 15px;
     font-size: 20px;
+  }
+
+  .sound-toggle span{
+    display: none;
   }
 }

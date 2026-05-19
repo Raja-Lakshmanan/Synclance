@@ -29,6 +29,7 @@ const SoundToggle = () => {
       title={enabled ? "Mute sound" : "Unmute sound"}
     >
       {enabled ? <MdVolumeUp /> : <MdVolumeOff />}
+      <span>{enabled ? "Sound On" : "Sound Off"}</span>
     </button>
   );
 };

@@ -1,64 +1,99 @@
-const SOUND_STORAGE_KEY = 'tamiztron-sound-enabled'
+const SOUND_MUTED_KEY = "sound-muted";
+const LEGACY_SOUND_KEY = "tamiztron-sound-enabled";
+const CLICK_VOLUME = 0.6;
 
-const SOUND_PATHS = {
-  open: '/audio/menu-open.mp3',
-  close: '/audio/menu-close.mp3',
-  click: '/audio/click.mp3',
-}
+const clickSoundModules = import.meta.glob("../assets/audio/click.mp3", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 
-const FALLBACK_TONES = {
-  open: { frequency: 520, duration: 0.06 },
-  close: { frequency: 320, duration: 0.055 },
-  click: { frequency: 430, duration: 0.04 },
-}
+const clickSoundFile = clickSoundModules["../assets/audio/click.mp3"];
 
-let audioContext
-const audioCache = {}
+let clickAudio;
+let audioContext;
 
 export const isSoundEnabled = () => {
-  if (typeof window === 'undefined') return false
-  return localStorage.getItem(SOUND_STORAGE_KEY) !== 'false'
-}
+  if (typeof window === "undefined") return false;
+  localStorage.removeItem(LEGACY_SOUND_KEY);
+  return localStorage.getItem(SOUND_MUTED_KEY) !== "true";
+};
 
 export const setSoundEnabled = (enabled) => {
-  if (typeof window === 'undefined') return
-  localStorage.setItem(SOUND_STORAGE_KEY, String(enabled))
-}
+  if (typeof window === "undefined") return;
+  localStorage.setItem(SOUND_MUTED_KEY, String(!enabled));
+};
 
-const playFallbackTone = (type) => {
-  const ToneContext = window.AudioContext || window.webkitAudioContext
-  if (!ToneContext) return
+export const initClickSound = () => {
+  if (typeof window === "undefined" || !clickSoundFile || clickAudio) return;
 
-  audioContext = audioContext || new ToneContext()
-  const tone = FALLBACK_TONES[type] || FALLBACK_TONES.click
-  const oscillator = audioContext.createOscillator()
-  const gain = audioContext.createGain()
+  clickAudio = new Audio(clickSoundFile);
+  clickAudio.volume = CLICK_VOLUME;
+  clickAudio.preload = "auto";
+};
 
-  oscillator.type = 'sine'
-  oscillator.frequency.setValueAtTime(tone.frequency, audioContext.currentTime)
-  gain.gain.setValueAtTime(0.0001, audioContext.currentTime)
-  gain.gain.exponentialRampToValueAtTime(0.028, audioContext.currentTime + 0.01)
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + tone.duration)
+const playFallbackClick = () => {
+  if (typeof window === "undefined") return;
 
-  oscillator.connect(gain)
-  gain.connect(audioContext.destination)
-  oscillator.start()
-  oscillator.stop(audioContext.currentTime + tone.duration)
-}
+  const ToneContext = window.AudioContext || window.webkitAudioContext;
+  if (!ToneContext) return;
 
-export const playUiSound = (type = 'click') => {
-  if (typeof window === 'undefined' || !isSoundEnabled()) return
+  audioContext = audioContext || new ToneContext();
 
-  const soundPath = SOUND_PATHS[type] || SOUND_PATHS.click
-  audioCache[type] = audioCache[type] || new Audio(soundPath)
-  const audio = audioCache[type]
+  if (audioContext.state === "suspended") {
+    audioContext.resume().catch(() => {});
+  }
 
-  audio.volume = 0.2
-  audio.currentTime = 0
+  const now = audioContext.currentTime;
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+  const filter = audioContext.createBiquadFilter();
 
-  audio.play().catch(() => {
-    playFallbackTone(type)
-  })
-}
+  oscillator.type = "triangle";
+  oscillator.frequency.setValueAtTime(520, now);
+  oscillator.frequency.exponentialRampToValueAtTime(280, now + 0.055);
 
-export const soundStorageKey = SOUND_STORAGE_KEY
+  filter.type = "lowpass";
+  filter.frequency.setValueAtTime(1200, now);
+
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.11, now + 0.008);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.085);
+
+  oscillator.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioContext.destination);
+  oscillator.start(now);
+  oscillator.stop(now + 0.09);
+};
+
+export const playClickSound = () => {
+  if (typeof window === "undefined" || !isSoundEnabled()) return;
+
+  initClickSound();
+
+  if (!clickAudio) {
+    playFallbackClick();
+    return;
+  }
+
+  try {
+    clickAudio.currentTime = 0;
+    clickAudio.volume = CLICK_VOLUME;
+    clickAudio.play().catch((error) => {
+      console.log("Click sound blocked or failed:", error);
+      playFallbackClick();
+    });
+  } catch (error) {
+    console.log("Click sound error:", error);
+    playFallbackClick();
+  }
+};
+
+export const playUiSound = () => {
+  playClickSound();
+};
+
+export const soundStorageKey = SOUND_MUTED_KEY;
+export const clickSoundFound = Boolean(clickSoundFile);
+export const clickSoundVolume = CLICK_VOLUME;
