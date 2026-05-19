@@ -8,7 +8,7 @@ const navLinks = [
   { href: "#home", label: "Home", id: "home" },
   { href: "#projects", label: "Services", id: "projects" },
   { href: "#about", label: "About us", id: "about" },
-  { href: "#blog", label: "Blog", id: "blog" },
+  { href: "#blog", label: "Sample", id: "blog" },
   { href: "#contact", label: "Contact", id: "contact" },
 ];
 
@@ -17,24 +17,39 @@ const Nav = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const sections = navLinks
-      .map((link) => document.getElementById(link.id))
-      .filter(Boolean);
+    const handleScroll = () => {
+      const navHeight = window.innerWidth <= 980 ? 72 : 86;
+      const offset = navHeight + 40;
+      const scrollPosition = window.scrollY + offset;
+      const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      let current = "home";
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: 0 }
-    );
+      navLinks.forEach((link) => {
+        const section = document.getElementById(link.id);
+        if (!section) return;
 
-    sections.forEach((section) => observer.observe(section));
+        if (scrollPosition >= section.offsetTop) {
+          current = link.id;
+        }
+      });
 
-    return () => observer.disconnect();
+      if (pageBottom) {
+        current = navLinks[navLinks.length - 1].id;
+      }
+
+      setActiveSection(current);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    window.addEventListener("hashchange", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("hashchange", handleScroll);
+    };
   }, []);
 
   useEffect(() => {

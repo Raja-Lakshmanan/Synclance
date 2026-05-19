@@ -6,7 +6,13 @@ import vid from '../components/navcomp/hero-video.mp4'
 import {motion} from 'framer-motion'
 const Home = () => {
   return (
-    <section className="home" id='home'>
+    <motion.section
+      className="home reveal-section"
+      id='home'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <video src={vid} autoPlay loop muted className='vi'></video>
       <motion.h1 initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.2}}><TypingText /></motion.h1>
       <motion.div className='para' initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.5}}>
@@ -24,7 +30,7 @@ const Home = () => {
           </div>
           <a href="#contact"><button className='btn'>Let's Connect<GoArrowUpRight className='arrow'/></button></a>
         </motion.div>
-    </section>
+    </motion.section>
   )
 }
 

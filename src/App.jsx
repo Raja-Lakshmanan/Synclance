@@ -8,18 +8,23 @@ import Contact from './pages/Contact'
 import Blog from './pages/Blog'
 import FloatingContact from './components/FloatingContact/FloatingContact'
 import Footer from './components/footer/Footer'
+import { MotionConfig } from 'framer-motion'
 const App = () => {
   return (
-    <div className='app'>
-      <Nav />
-      <Home/>
-      <Projects />
-      <About />
-      <Blog />
-      <Contact/>
-      <Footer />
-      <FloatingContact />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className='app'>
+        <Nav />
+        <main className='app-main'>
+          <Home/>
+          <Projects />
+          <About />
+          <Blog />
+          <Contact/>
+        </main>
+        <Footer />
+        <FloatingContact />
+      </div>
+    </MotionConfig>
   )
 }
 

@@ -60,13 +60,27 @@ const members = [
     email: "Roshan@example.com",
     image: memberImages["../assets/members/roshan.png"],
   },
+  {
+    name: "Sasmitha",
+    role: "PCB Design & Assignment Writing",
+    phone: "+917639077992",
+    email: "Roshan@example.com",
+    image: memberImages["../assets/members/sas.png"],
+  },
 ];
 
 const googleFormLink = "https://forms.gle/YOUR_GOOGLE_FORM_LINK";
 
 const About = () => {
   return (
-    <section className='about' id='about'>
+    <motion.section
+      className='about reveal-section'
+      id='about'
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+    >
       <motion.div
         className='first'
         initial={{ opacity: 0, y: 28 }}
@@ -134,7 +148,7 @@ const About = () => {
           </motion.article>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

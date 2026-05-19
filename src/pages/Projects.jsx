@@ -2,14 +2,16 @@ import React , {useState}from 'react'
 import '../styles/projects.css'
 import ScrollRevealText from '../components/scrollcomp/ScrollRevealText'
 import { GrServices } from "react-icons/gr";
-import { FaUikit } from "react-icons/fa6";
+import { FaPenRuler, FaUikit } from "react-icons/fa6";
 import { GiTargetPoster } from "react-icons/gi";
 import { SiTransportforlondon } from "react-icons/si";
 import { FaInternetExplorer } from "react-icons/fa";
 import { SiArduino } from "react-icons/si";
 import { SiRobotframework } from "react-icons/si";
+import { SiLibreofficecalc } from "react-icons/si";
 import { LuCircuitBoard } from "react-icons/lu";
 import { MdWebStories } from "react-icons/md";
+import { MdOutlineSlideshow } from "react-icons/md";
 import { FaPager } from "react-icons/fa";
 import { FaReact } from "react-icons/fa";
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
@@ -26,6 +28,9 @@ const servicesData = [
   { id: 5, icon:<SiArduino/>,title: "Arduino Projects", category: "Projects" , description:"Custom Arduino-based electronics projects for automation, sensors, robotics, and student academic projects." },
   { id: 6, icon:<SiRobotframework/>,title: "Robotics Projects", category: "Projects", description:"Robots designed for navigation, obstacle avoidance, line following, automation, and real-world applications."  },
   { id: 7, icon:<LuCircuitBoard/>,title: "PCB Design & Fabrication", category: "Projects" , description:"Professional PCB design for IoT, embedded systems, and electronics circuits, including schematic design and fabrication support." },
+  { id: 14, icon:<MdOutlineSlideshow/>,title: "PPT", category: "Projects", description:"Professional PowerPoint presentation design for college projects, business ideas, seminars, and reports with clean layouts and premium visuals." },
+  { id: 15, icon:<SiLibreofficecalc/>,title: "Data Management using Excel", category: "Projects", description:"Organized Excel sheets, data entry, formatting, tables, charts, formulas, and report-ready data management for academic and business needs." },
+  { id: 16, icon:<FaPenRuler/>,title: "Assignment Writing and EG Drawing", category: "Projects", description:"Neat assignment writing support and Engineering Graphics drawing assistance with clean presentation and accurate formatting." },
 
   { id: 8, icon:<MdWebStories/>,title: "Web Development (React + Django)", category: "Development", description:"Full-stack web development with powerful backend (Django) and modern frontend (React) for secure, scalable, and fast web applications."  },
   { id: 9,icon:<FaPager/>, title: "Landing Page Development", category: "Development", description:"Fast, responsive, and visually appealing landing pages optimized for conversions, business promotions, and product showcasing."  },
@@ -64,7 +69,14 @@ const Projects = () => {
   };
 
   return (
-    <section className="projects" id='projects'>
+    <motion.section
+      className="projects reveal-section"
+      id='projects'
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+    >
       <br />
       <div className='first'>
         <h2><GrServices className='sicon'/> Our Services</h2>
@@ -106,7 +118,7 @@ const Projects = () => {
           </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }
 

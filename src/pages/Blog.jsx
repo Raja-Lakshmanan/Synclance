@@ -26,7 +26,14 @@ const blogPosts = [
 
 const Blog = () => {
   return (
-    <section className='blog' id='blog'>
+    <motion.section
+      className='blog reveal-section'
+      id='blog'
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
+    >
       <motion.div
         className='blog-head'
         initial={{ opacity: 0, y: 28 }}
@@ -34,7 +41,7 @@ const Blog = () => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2><BsJournalText className='sicon'/> Blog</h2>
+        <h2><BsJournalText className='sicon'/> Sample</h2>
         <p>Placeholder updates, business notes, service insights, and product ideas will appear here.</p>
       </motion.div>
 
@@ -54,7 +61,7 @@ const Blog = () => {
           </motion.article>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }
 
