@@ -42,8 +42,8 @@ const members = [
   {
     name: "Dharun",
     role: "PCB Design",
-    phone: "+917639077992",
-    email: "dharun@example.com",
+    phone: "+919342253612",
+    email: "mdharun8105@gmail.com",
     image: memberImages["../assets/members/dharun.png"],
   },
   {

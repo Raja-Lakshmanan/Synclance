@@ -11,7 +11,7 @@ const Home = () => {
       <motion.h1 initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.2}}><TypingText /></motion.h1>
       <motion.div className='para' initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.5}}>
         <p >Tamiztron is a creative-tech studio offering everything from engineering project development to modern design services. We combine technical expertise with artistic creativity to deliver professional posters, PCB design, video edits, portfolios, and responsive websites.</p><br />
-        <p>Whether you're a student, startup, creator, or business—Devonix helps you build your brand, elevate your visuals, and bring your ideas to life.</p>
+        <p>Whether you're a student, startup, creator, or business—Tamiztron helps you build your brand, elevate your visuals, and bring your ideas to life.</p>
       </motion.div>
       <motion.div className='ceo'initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.5}}>
         <p className='c1'>XXXXXXXXX</p>
