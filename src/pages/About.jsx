@@ -5,7 +5,7 @@ import { FiMail, FiPhone, FiPlus } from "react-icons/fi";
 import ScrollRevealText from '../components/scrollcomp/ScrollRevealText';
 import { motion } from 'framer-motion';
 
-const memberImages = import.meta.glob("../assets/members/*.png", {
+const memberImages = import.meta.glob("../assets/members/*.{png,jpg,jpeg,webp}", {
   eager: true,
   query: "?url",
   import: "default",
@@ -53,6 +53,13 @@ const members = [
     email: "abishek@example.com",
     image: memberImages["../assets/members/abi.png"],
   },
+  {
+    name: "Harshath Roshan",
+    role: "Video Editing",
+    phone: "+917639077992",
+    email: "Roshan@example.com",
+    image: memberImages["../assets/members/roshan.png"],
+  },
 ];
 
 const googleFormLink = "https://forms.gle/YOUR_GOOGLE_FORM_LINK";
@@ -82,8 +89,8 @@ const About = () => {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
             >
-              <div className="member-photo-wrap">
-                <img className="member-photo" src={member.image} alt={member.name} />
+              <div className="member-image-wrap">
+                <img className="member-image" src={member.image} alt={member.name} />
               </div>
               <div className="member-details">
                 <h3 className="member-name">{member.name}</h3>
