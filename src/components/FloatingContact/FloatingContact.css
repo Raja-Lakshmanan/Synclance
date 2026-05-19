@@ -78,10 +78,11 @@
     .floating-contact{
         right: 18px;
         bottom: 18px;
+        z-index: 2500;
     }
 
     .floating-contact-item{
-        min-width: 142px;
+        min-width: 132px;
         min-height: 46px;
         font-size: 13px;
     }

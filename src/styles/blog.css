@@ -44,7 +44,7 @@
     min-height: 260px;
     padding: 30px 26px;
     border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
+    border-radius: 12px;
     background:
         linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.018)),
         linear-gradient(145deg, #030303, #191919);
@@ -74,7 +74,7 @@
     display: inline-flex;
     margin-bottom: 24px;
     padding: 7px 12px;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.14);
     border-radius: 999px;
     color: #101010;
     background: linear-gradient(90deg, #ffffff, #bdbdbd);
@@ -110,6 +110,9 @@
 @media (max-width: 620px){
     .blog{
         padding: 6rem 5% 4rem;
+    }
+    .blog-head p{
+        font-size: 15px;
     }
 
     .blog-grid{

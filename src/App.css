@@ -2,6 +2,7 @@
   background:
     radial-gradient(circle at top right, rgba(192, 192, 192, 0.14), transparent 28rem),
     radial-gradient(circle at 10% 45%, rgba(255, 255, 255, 0.055), transparent 24rem),
+    radial-gradient(circle at 82% 68%, rgba(255,255,255,0.045), transparent 22rem),
     linear-gradient(0.3turn, #020202 78%, #3f3f3f);
   width: 100%;
   min-height: 100vh;

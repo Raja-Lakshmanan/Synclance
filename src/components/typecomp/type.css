@@ -6,6 +6,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     max-width: 92vw;
+    gap: 6px;
 }
 .dev{
     background: linear-gradient(90deg,white, darkgray , whitesmoke , gray, white);
@@ -25,5 +26,17 @@
   }
   100% {
     background-position: 200% 50%;
+  }
+}
+
+@media (max-width: 768px){
+  .type{
+    height: auto;
+    font-size: clamp(7px, 2.4vw, 10px);
+    line-height: 1.2;
+    max-width: 100%;
+  }
+  .dev{
+    -webkit-box-reflect: unset;
   }
 }
