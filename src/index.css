@@ -4,6 +4,7 @@
 
 :root{
   --premium-ease: cubic-bezier(.2,.8,.2,1);
+  --hover-transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease, color 0.35s ease;
   --premium-border: rgba(255,255,255,0.16);
   --premium-border-strong: rgba(235,235,235,0.34);
   --premium-glow: 0 24px 64px rgba(0,0,0,0.48), 0 0 30px rgba(210,210,210,0.08);
@@ -103,11 +104,7 @@ button,
   position: relative;
   overflow: hidden;
   transition:
-    transform 0.3s var(--premium-ease),
-    box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease;
+    var(--hover-transition);
 }
 
 .premium-btn::before,
@@ -130,7 +127,7 @@ button::before,
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.24), transparent);
   transform: skewX(-20deg);
-  transition: left 0.62s ease;
+  transition: left 0.7s ease;
   pointer-events: none;
 }
 
@@ -229,9 +226,8 @@ button:active,
   *,
   *::before,
   *::after{
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     scroll-behavior: auto !important;
-    transition-duration: 0.001ms !important;
+    transition: none !important;
   }
 }

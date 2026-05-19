@@ -21,8 +21,7 @@ const Home = () => {
         <p>Whether you're a student, startup, creator, or business—Tamiztron helps you build your brand, elevate your visuals, and bring your ideas to life.</p>
       </motion.div>
       <motion.div className='ceo'initial={{opacity:0,y:50}} animate={{opacity:1,y:0}} transition={{duration:1,delay:0.5}}>
-        <p className='c1'>XXXXXXXXX</p>
-        <p  className='c2'>Chief Executive Officer</p>
+ 
         </motion.div>
         <motion.div className='bottom'initial={{opacity:0}} animate={{opacity:1}} transition={{duration:0.8,delay:0.3}}>
           <div className='quotes'>

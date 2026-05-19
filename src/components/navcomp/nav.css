@@ -94,7 +94,7 @@
 .aixor-desktop-links a:hover,
 .aixor-desktop-links a.active {
   color: #ffffff;
-  transform: translateY(-1px);
+  transform: none;
   text-shadow: 0 0 18px rgba(255,255,255,0.18);
 }
 

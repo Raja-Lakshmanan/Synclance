@@ -96,7 +96,7 @@
 
 .footer-column a:hover {
   color: #ffffff;
-  transform: translateX(4px);
+  transform: translateX(3px);
   text-shadow: 0 0 16px rgba(255,255,255,0.22);
 }
 
@@ -128,7 +128,7 @@
 }
 
 .footer-socials a:hover {
-  transform: translateY(-3px);
+  transform: perspective(700px) rotateX(6deg) rotateY(-6deg) translateY(-3px);
   color: #080808;
   background: linear-gradient(90deg, #ffffff, #bdbdbd);
   border-color: rgba(255,255,255,0.38);

@@ -12,6 +12,7 @@
     display: grid;
     gap: 10px;
     justify-items: end;
+    transform-origin: bottom right;
 }
 
 .floating-contact-item,
@@ -28,7 +29,7 @@
     box-shadow: 0 16px 42px rgba(0,0,0,0.48), inset 0 1px 4px rgba(255,255,255,0.08);
     backdrop-filter: blur(14px);
     text-decoration: none;
-    transition: transform 0.28s var(--premium-ease), border-color 0.28s ease, background 0.28s ease, color 0.28s ease, box-shadow 0.28s ease;
+    transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
 }
 
 .floating-contact-item{
@@ -61,9 +62,17 @@
 }
 
 .floating-contact-item:hover,
-.floating-contact-main:hover,
+.floating-contact-main:hover{
+    transform: scale(1.04) rotate(2deg);
+    border-color: silver;
+    background:
+        linear-gradient(90deg, #ffffff, #bdbdbd);
+    color: #080808;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.52), 0 0 26px rgba(255,255,255,0.1);
+}
+
 .floating-contact-main.open{
-    transform: translateY(-3px);
+    transform: scale(1.04) rotate(45deg);
     border-color: silver;
     background:
         linear-gradient(90deg, #ffffff, #bdbdbd);

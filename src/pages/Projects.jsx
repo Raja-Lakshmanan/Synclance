@@ -1,4 +1,4 @@
-import React , {useState}from 'react'
+import React , {useEffect, useState}from 'react'
 import '../styles/projects.css'
 import ScrollRevealText from '../components/scrollcomp/ScrollRevealText'
 import { GrServices } from "react-icons/gr";
@@ -46,7 +46,7 @@ const categories = ["All", "Design", "Projects", "Development", "Editing"];
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [activeServiceId, setActiveServiceId] = useState(null);
+  const [activeService, setActiveService] = useState(null);
 
   const filteredServices =
     activeCategory === "All"
@@ -56,20 +56,38 @@ const Projects = () => {
   const handleCategoryChange = (cat) => {
     playUiSound("click");
     setActiveCategory(cat);
-    setActiveServiceId(null);
+    setActiveService(null);
   };
 
-  const toggleService = (serviceId) => {
+  const openService = (service) => {
     playUiSound("click");
-    setActiveServiceId((currentId) => (currentId === serviceId ? null : serviceId));
+    setActiveService((currentId) => (currentId === service.id ? null : service.id));
   };
 
-  const handleServiceKeyDown = (event, serviceId) => {
+  const closeService = () => {
+    playUiSound("click");
+    setActiveService(null);
+  };
+
+  const handleServiceKeyDown = (event, service) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      toggleService(serviceId);
+      openService(service);
     }
   };
+
+  useEffect(() => {
+    if (!activeService) return undefined;
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setActiveService(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [activeService]);
 
   return (
     <motion.section
@@ -104,20 +122,35 @@ const Projects = () => {
         {filteredServices.map((service, index) => (
           <motion.div
             key={service.id}
-            className={`service-card ${activeServiceId === service.id ? "active" : ""}`}
+            className={`service-card ${activeService === service.id ? "is-open" : ""}`}
             role="button"
             tabIndex={0}
-            aria-expanded={activeServiceId === service.id}
-            onClick={() => toggleService(service.id)}
-            onKeyDown={(event) => handleServiceKeyDown(event, service.id)}
+            aria-expanded={activeService === service.id}
+            onClick={() => openService(service)}
+            onKeyDown={(event) => handleServiceKeyDown(event, service)}
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, delay: index * 0.04, ease: "easeOut" }}
           >
-            <h1 className='ico service-icon'>{service.icon}</h1>
+            <button
+              className="service-card-close"
+              type="button"
+              aria-label="Close service details"
+              onClick={(event) => {
+                event.stopPropagation();
+                closeService();
+              }}
+            >
+              &times;
+            </button>
             <h3 className='service-title'>{service.title}</h3>
-            <p className='des service-description'>{service.description}</p>
+            <p className="service-card-hint">Click for more information.</p>
+            <div className="service-card-details">
+              <div className='ico service-icon'>{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+            </div>
           </motion.div>
         ))}
       </div>
