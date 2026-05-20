@@ -146,7 +146,10 @@ const Projects = () => {
             </button>
             <h3 className='service-title'>{service.title}</h3>
             <p className="service-card-hint">Click for more information.</p>
-            <div className="service-card-details">
+            <div
+              className="service-card-details"
+              onClick={(event) => event.stopPropagation()}
+            >
               <div className='ico service-icon'>{service.icon}</div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>

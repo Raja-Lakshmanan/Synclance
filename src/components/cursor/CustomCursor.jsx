@@ -4,113 +4,148 @@ import "./customCursor.css";
 const interactiveSelector = [
   "a",
   "button",
-  "[role='button']",
   ".service-card",
   ".member-card",
-  ".blog-card",
   ".premium-btn",
-  ".contact-info-card",
-  ".contact-submit",
-  ".btn",
-  ".apply-btn",
-  ".category-btn",
   ".floating-contact-button",
-  ".floating-contact-main",
-  ".floating-contact-item",
+  ".contact-info-card",
 ].join(",");
 
+const opacitySteps = [1, 0.75, 0.55, 0.35, 0.2, 0.1];
+const scaleSteps = [1, 0.88, 0.76, 0.64, 0.52, 0.42];
+
+const supportsCustomCursor = () => {
+  if (typeof window === "undefined") return false;
+
+  return (
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+};
+
 const CustomCursor = () => {
-  const dotRef = useRef(null);
-  const ringRef = useRef(null);
-  const mouse = useRef({ x: 0, y: 0 });
-  const ring = useRef({ x: 0, y: 0 });
+  const [enabled, setEnabled] = useState(supportsCustomCursor);
+  const [isMoving, setIsMoving] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [points, setPoints] = useState([]);
+  const pointsRef = useRef([]);
   const frameRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-  const [hovering, setHovering] = useState(false);
+  const moveTimeoutRef = useRef(null);
 
   useEffect(() => {
-    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const pointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    if (!finePointerQuery.matches) {
+    const updateEnabled = () => {
+      setEnabled(pointerQuery.matches && !reducedMotionQuery.matches);
+    };
+
+    pointerQuery.addEventListener("change", updateEnabled);
+    reducedMotionQuery.addEventListener("change", updateEnabled);
+
+    return () => {
+      pointerQuery.removeEventListener("change", updateEnabled);
+      reducedMotionQuery.removeEventListener("change", updateEnabled);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) {
+      setIsMoving(false);
+      setIsHovering(false);
+      setPoints([]);
+      pointsRef.current = [];
       return undefined;
     }
 
-    const render = () => {
-      ring.current.x += (mouse.current.x - ring.current.x) * 0.16;
-      ring.current.y += (mouse.current.y - ring.current.y) * 0.16;
+    const publishPoints = () => {
+      frameRef.current = null;
+      setPoints([...pointsRef.current]);
+    };
 
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${mouse.current.x}px, ${mouse.current.y}px, 0) translate(-50%, -50%)`;
-      }
-
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0) translate(-50%, -50%)`;
-      }
-
-      frameRef.current = requestAnimationFrame(render);
+    const queuePublish = () => {
+      if (frameRef.current) return;
+      frameRef.current = requestAnimationFrame(publishPoints);
     };
 
     const handleMouseMove = (event) => {
-      mouse.current.x = event.clientX;
-      mouse.current.y = event.clientY;
+      pointsRef.current = [
+        { x: event.clientX, y: event.clientY },
+        ...pointsRef.current,
+      ].slice(0, 6);
 
-      if (!visible) {
-        ring.current.x = event.clientX;
-        ring.current.y = event.clientY;
-        setVisible(true);
+      setIsMoving(true);
+      queuePublish();
+
+      if (moveTimeoutRef.current) {
+        clearTimeout(moveTimeoutRef.current);
       }
+
+      moveTimeoutRef.current = setTimeout(() => {
+        setIsMoving(false);
+      }, 320);
     };
 
     const handleMouseOver = (event) => {
-      setHovering(Boolean(event.target.closest(interactiveSelector)));
+      setIsHovering(Boolean(event.target.closest(interactiveSelector)));
     };
 
     const handleMouseOut = (event) => {
-      if (!event.relatedTarget || !event.relatedTarget.closest(interactiveSelector)) {
-        setHovering(false);
+      if (!event.relatedTarget?.closest?.(interactiveSelector)) {
+        setIsHovering(false);
       }
     };
 
     const handleMouseLeave = () => {
-      setVisible(false);
-      setHovering(false);
+      setIsMoving(false);
+      setIsHovering(false);
     };
 
-    const handleMouseEnter = () => {
-      setVisible(true);
-    };
-
-    frameRef.current = requestAnimationFrame(render);
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mouseout", handleMouseOut);
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
-    document.documentElement.addEventListener("mouseenter", handleMouseEnter);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mouseout", handleMouseOut);
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
-      document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
 
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
       }
+
+      if (moveTimeoutRef.current) {
+        clearTimeout(moveTimeoutRef.current);
+      }
     };
-  }, [visible]);
+  }, [enabled]);
+
+  if (!enabled) {
+    return null;
+  }
 
   return (
-    <>
-      <span
-        ref={ringRef}
-        className={`custom-cursor-ring ${visible ? "cursor-visible" : ""} ${hovering ? "cursor-hover" : ""}`}
-      />
-      <span
-        ref={dotRef}
-        className={`custom-cursor-dot ${visible ? "cursor-visible" : ""} ${hovering ? "cursor-hover" : ""}`}
-      />
-    </>
+    <div
+      className={`custom-cursor-trail ${isMoving ? "is-moving" : ""} ${
+        isHovering ? "is-hovering" : ""
+      }`}
+      aria-hidden="true"
+    >
+      {points.map((point, index) => (
+        <span
+          className="cursor-trail-dot"
+          key={`${index}-${point.x}-${point.y}`}
+          style={{
+            left: point.x,
+            top: point.y,
+            "--dot-opacity": opacitySteps[index] ?? 0.08,
+            transform: `translate(-50%, -50%) scale(${scaleSteps[index] ?? 0.4})`,
+          }}
+        />
+      ))}
+    </div>
   );
 };
 
