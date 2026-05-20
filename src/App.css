@@ -28,8 +28,8 @@
   background-size: 88px 88px, 88px 88px, 100% 100%;
   mask-image: radial-gradient(circle at center, #000 24%, transparent 72%);
   -webkit-mask-image: radial-gradient(circle at center, #000 24%, transparent 72%);
-  opacity: 0.34;
-  animation: premiumGridMove 28s linear infinite;
+  opacity: 0.26;
+  animation: premiumGridMove 38s linear infinite;
 }
 
 .app::after{
@@ -39,9 +39,9 @@
     radial-gradient(circle at 82% 70%, rgba(192,192,192,0.09), transparent 33%),
     radial-gradient(circle at 54% 104%, rgba(255,255,255,0.055), transparent 29%),
     linear-gradient(112deg, transparent 24%, rgba(255,255,255,0.04) 49%, transparent 72%);
-  opacity: 0.94;
+  opacity: 0.74;
   mix-blend-mode: screen;
-  animation: premiumBgFloat 17s ease-in-out infinite alternate;
+  animation: premiumBgFloat 24s ease-in-out infinite alternate;
   will-change: transform;
 }
 

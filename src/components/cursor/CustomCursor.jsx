@@ -9,6 +9,8 @@ const interactiveSelector = [
   ".member-card",
   ".blog-card",
   ".premium-btn",
+  ".contact-info-card",
+  ".contact-submit",
   ".btn",
   ".apply-btn",
   ".category-btn",

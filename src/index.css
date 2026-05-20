@@ -4,10 +4,10 @@
 
 :root{
   --premium-ease: cubic-bezier(.2,.8,.2,1);
-  --hover-transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease, color 0.35s ease;
+  --hover-transition: transform 0.42s ease, box-shadow 0.42s ease, border-color 0.42s ease, background 0.42s ease, color 0.42s ease;
   --premium-border: rgba(255,255,255,0.16);
   --premium-border-strong: rgba(235,235,235,0.34);
-  --premium-glow: 0 24px 64px rgba(0,0,0,0.48), 0 0 30px rgba(210,210,210,0.08);
+  --premium-glow: 0 22px 58px rgba(0,0,0,0.46), 0 0 24px rgba(210,210,210,0.075);
   --premium-glass:
     linear-gradient(145deg, rgba(255,255,255,0.095), rgba(255,255,255,0.018)),
     rgba(8,8,8,0.82);
@@ -48,7 +48,8 @@ body::before{
     radial-gradient(circle at 50% 100%, rgba(255,255,255,0.065), transparent 31%),
     radial-gradient(circle at 58% 12%, rgba(255,255,255,0.045), transparent 24%);
   filter: blur(0.2px);
-  animation: premiumBgFloat 16s ease-in-out infinite alternate;
+  opacity: 0.78;
+  animation: premiumBgFloat 22s ease-in-out infinite alternate;
 }
 
 body::after{
@@ -61,8 +62,8 @@ body::after{
   background-position: 0 0, 0 0, 0 0;
   mask-image: radial-gradient(circle at center, #000 28%, transparent 74%);
   -webkit-mask-image: radial-gradient(circle at center, #000 28%, transparent 74%);
-  opacity: 0.48;
-  animation: premiumGridMove 24s linear infinite;
+  opacity: 0.38;
+  animation: premiumGridMove 34s linear infinite;
 }
 
 button,
@@ -142,7 +143,7 @@ button:hover,
 .aixor-mail:hover,
 .aixor-menu-btn:hover,
 .agency-close-btn:hover{
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: var(--premium-glow);
 }
 
