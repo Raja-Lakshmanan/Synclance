@@ -67,6 +67,20 @@ const members = [
     email: "sasmithaprakash1984@gmail.com",
     image: memberImages["../assets/members/sas.png"],
   },
+  {
+    name: "Radha Krishnan",
+    role: "PCB Design & Assignment Writing",
+    phone: "+918190018720",
+    email: "sasmithaprakash1984@gmail.com",
+    image: memberImages["../assets/members/radha.png"],
+  },
+  {
+    name: "Niranjana",
+    role: "PCB Design & Assignment Writing",
+    phone: "+918190018720",
+    email: "sasmithaprakash1984@gmail.com",
+    image: memberImages["../assets/members/nir.png"],
+  },
 ];
 
 const googleFormLink = "https://forms.gle/F2semvxttVkhPqy58";
