@@ -1,6 +1,6 @@
-import React , {useEffect, useState}from 'react'
+import {useEffect, useState}from 'react'
 import '../styles/projects.css'
-import ScrollRevealText from '../components/scrollcomp/ScrollRevealText'
+import ScrollRevealText from '../components/ScrollRevealText'
 import { GrServices } from "react-icons/gr";
 import { FaPenRuler, FaUikit } from "react-icons/fa6";
 import { GiTargetPoster } from "react-icons/gi";
@@ -43,6 +43,23 @@ const servicesData = [
 ];
 
 const categories = ["All", "Design", "Projects", "Development", "Editing"];
+
+const projectIntro =
+  "At Tamiztron, we combine creativity, engineering, and technology to deliver high-quality solutions for students, creators, startups, and businesses. We help you turn ideas into reality with precision, professionalism, and powerful design.";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12
+    }
+  }
+};
 
 const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -101,7 +118,7 @@ const Projects = () => {
       <br />
       <div className='first'>
         <h2><GrServices className='sicon'/> Our Services</h2>
-        <div className="scrollpar"><ScrollRevealText>At Tamiztron, we combine creativity, engineering, and technology to deliver high-quality solutions for students, creators, startups, and businesses. We help you turn ideas into reality with precision, professionalism, and powerful design.</ScrollRevealText></div>
+        <div className="scrollpar"><ScrollRevealText text={projectIntro} /></div>
       </div>
       <br />
       <h1 className='h'>What We Do</h1><br />
@@ -118,8 +135,14 @@ const Projects = () => {
           </button>
         ))}
       </div>
-      <div className="services-grid">
-        {filteredServices.map((service, index) => (
+      <motion.div
+        className="services-grid"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {filteredServices.map((service) => (
           <motion.div
             key={service.id}
             className={`service-card ${activeService === service.id ? "is-open" : ""}`}
@@ -128,10 +151,9 @@ const Projects = () => {
             aria-expanded={activeService === service.id}
             onClick={() => openService(service)}
             onKeyDown={(event) => handleServiceKeyDown(event, service)}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.55, delay: index * 0.04, ease: "easeOut" }}
+            variants={fadeUp}
+            transition={{ duration: 0.58, ease: "easeOut" }}
+            whileHover={{ y: -5 }}
           >
             <button
               className="service-card-close"
@@ -156,7 +178,7 @@ const Projects = () => {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </motion.section>
   )
 }

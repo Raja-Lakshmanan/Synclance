@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PiMailboxFill } from "react-icons/pi";
 import "./nav.css";
 import logo from "./l1.png";

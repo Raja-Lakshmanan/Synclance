@@ -1,8 +1,7 @@
-import React from 'react'
 import '../styles/about.css'
 import { RiTeamLine } from "react-icons/ri";
 import { FiMail, FiPhone, FiPlus } from "react-icons/fi";
-import ScrollRevealText from '../components/scrollcomp/ScrollRevealText';
+import ScrollRevealText from '../components/ScrollRevealText';
 import { motion } from 'framer-motion';
 
 const memberImages = import.meta.glob("../assets/members/*.{png,jpg,jpeg,webp}", {
@@ -85,6 +84,23 @@ const members = [
 
 const googleFormLink = "https://forms.gle/F2semvxttVkhPqy58";
 
+const aboutIntro =
+  "At Tamiztron, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12
+    }
+  }
+};
+
 const About = () => {
   return (
     <section className='about' id='about'>
@@ -96,19 +112,24 @@ const About = () => {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <h2><RiTeamLine className='sicon'/> Our Members</h2>
-        <div className='scrollpar'><ScrollRevealText>At Tamiztron, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.</ScrollRevealText></div>
+        <div className='scrollpar'><ScrollRevealText text={aboutIntro} /></div>
       </motion.div>
 
       <div className="about-members-section">
-        <div className="members-grid">
-          {members.map((member, index) => (
+        <motion.div
+          className="members-grid"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {members.map((member) => (
             <motion.article
               className="member-card"
               key={member.name}
-              initial={{ opacity: 0, y: 26 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
+              variants={fadeUp}
+              transition={{ duration: 0.62, ease: "easeOut" }}
+              whileHover={{ y: -6, scale: 1.01 }}
             >
               <div className="member-image-wrap">
                 <img className="member-image" src={member.image} alt={member.name} />
@@ -132,10 +153,9 @@ const About = () => {
 
           <motion.article
             className="member-card apply-member-card"
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: members.length * 0.05, ease: "easeOut" }}
+            variants={fadeUp}
+            transition={{ duration: 0.62, ease: "easeOut" }}
+            whileHover={{ y: -6, scale: 1.01 }}
           >
             <div className="apply-plus" aria-hidden="true">
               <FiPlus />
@@ -153,7 +173,7 @@ const About = () => {
               </a>
             </div>
           </motion.article>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

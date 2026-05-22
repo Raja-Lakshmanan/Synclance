@@ -54,6 +54,8 @@
 
 .aixor-desktop-links a {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   color: rgba(245,245,245,0.72);
   font-size: 14px;
   font-weight: 600;
@@ -64,31 +66,17 @@
   transition: color 0.3s ease, transform 0.3s var(--premium-ease), text-shadow 0.3s ease;
 }
 
-.aixor-desktop-links a::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 2px;
-  width: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #ffffff, silver, transparent);
-  transform: translateX(-50%);
-  transition: width 0.35s ease;
-}
-
 .aixor-desktop-links a::after {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: silver;
-  opacity: 0;
-  transform: translateX(-50%) scale(0.4);
-  box-shadow: 0 0 18px rgba(255,255,255,0.28);
-  transition: opacity 0.3s ease, transform 0.3s var(--premium-ease);
+  left: 0;
+  bottom: 3px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.55));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.32s var(--premium-ease);
 }
 
 .aixor-desktop-links a:hover,
@@ -98,15 +86,10 @@
   text-shadow: 0 0 18px rgba(255,255,255,0.18);
 }
 
-.aixor-desktop-links a:hover::before,
-.aixor-desktop-links a.active::before {
-  width: 100%;
-}
-
 .aixor-desktop-links a:hover::after,
 .aixor-desktop-links a.active::after {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .aixor-right {
@@ -349,6 +332,7 @@
 }
 
 .agency-mobile-links a {
+  position: relative;
   width: fit-content;
   max-width: 100%;
   opacity: 0;
@@ -365,11 +349,30 @@
   transition: color 0.28s ease, transform 0.28s var(--premium-ease), text-shadow 0.28s ease;
 }
 
+.agency-mobile-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, #ffffff, rgba(255,255,255,0.44));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.32s var(--premium-ease);
+}
+
 .agency-mobile-links a:hover,
 .agency-mobile-links a.active {
   color: #ffffff;
   transform: translateX(6px);
   text-shadow: 0 0 22px rgba(255,255,255,0.18), 0 14px 34px rgba(0,0,0,0.55);
+}
+
+.agency-mobile-links a:hover::after,
+.agency-mobile-links a.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 @media (max-width: 480px) {
