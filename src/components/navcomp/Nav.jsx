@@ -75,7 +75,7 @@ const Nav = () => {
     <>
       <header className="aixor-nav">
         <a href="#home" className="aixor-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
-          <img src={logo} alt="Tamiztron Logo" />
+          <img src={logo} alt="Synclance Logo" height="1000"/>
         </a>
 
         <nav className="aixor-desktop-links">
@@ -122,7 +122,7 @@ const Nav = () => {
       {isOpen && (
         <div className="agency-mobile-menu" role="dialog" aria-modal="true">
           <div className="agency-mobile-top">
-            <img src={logo} alt="Tamiztron Logo" />
+            <img src={logo} alt="Synclance Logo" />
             <button
               className="agency-close-btn"
               onClick={closeMenu}

@@ -3,7 +3,7 @@ import './type.css'
 const TypingText = () => {
   return (
     <div className='type'>
-      <h1 className='dev'>TAMIZTRON :&nbsp;{' '}</h1>
+      <h1 className='dev'>SYNCLANCE :&nbsp;{' '}</h1>
       <h1 className='dev'>
         <Typewriter
           words={['Creative Tech', 'Design Solutions', 'Innovative Ideas']}

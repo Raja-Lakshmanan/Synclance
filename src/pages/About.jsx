@@ -85,7 +85,7 @@ const members = [
 const googleFormLink = "https://forms.gle/F2semvxttVkhPqy58";
 
 const aboutIntro =
-  "At Tamiztron, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.";
+  "At Synclance, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },

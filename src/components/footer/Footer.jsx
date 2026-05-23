@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FiMail, FiPhone } from "react-icons/fi";
@@ -57,8 +56,8 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <a href="#home" className="footer-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
-            <img src={logo} alt="Tamiztron Logo" />
-            <span>Tamiztron</span>
+            <img src={logo} alt="Synclance Logo" />
+            <span>Synclance</span>
           </a>
           <p>Creative Tech & Design Solutions</p>
           <div className="footer-socials" aria-label="Social and contact links">
@@ -102,7 +101,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>© 2026 Tamiztron. All rights reserved.</p>
+        <p>© 2026 Synclance. All rights reserved.</p>
       </div>
     </motion.footer>
   );
