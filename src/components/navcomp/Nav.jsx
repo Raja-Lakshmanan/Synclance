@@ -22,7 +22,7 @@ const Nav = () => {
     const handleScroll = () => {
       const navHeight = window.innerWidth <= 980 ? 72 : 86;
       const offset = navHeight + 40;
-      const scrollPosition = window.scrollY + offset;
+      const scrollPosition = window.scrollY - offset;
       const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
       let current = "home";
 
@@ -75,7 +75,7 @@ const Nav = () => {
     <>
       <header className="aixor-nav">
         <a href="#home" className="aixor-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
-          <img src={logo} alt="Synclance Logo" height="1000"/>
+          <img src={logo} alt="Luminotrix Logo" height="1000"/>
         </a>
 
         <nav className="aixor-desktop-links">
@@ -122,7 +122,7 @@ const Nav = () => {
       {isOpen && (
         <div className="agency-mobile-menu" role="dialog" aria-modal="true">
           <div className="agency-mobile-top">
-            <img src={logo} alt="Synclance Logo" />
+            <img src={logo} alt="Luminotrix Logo" />
             <button
               className="agency-close-btn"
               onClick={closeMenu}

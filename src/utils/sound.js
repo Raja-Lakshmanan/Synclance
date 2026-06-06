@@ -1,5 +1,5 @@
 const SOUND_MUTED_KEY = "sound-muted";
-const LEGACY_SOUND_KEY = "synclance-sound-enabled";
+const LEGACY_SOUND_KEY = "luminotrix-sound-enabled";
 const CLICK_VOLUME = 0.6;
 
 const clickSoundModules = import.meta.glob("../assets/audio/click.mp3", {

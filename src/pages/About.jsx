@@ -1,6 +1,6 @@
 import '../styles/about.css'
 import { RiTeamLine } from "react-icons/ri";
-import { FiMail, FiPhone, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import ScrollRevealText from '../components/ScrollRevealText';
 import { motion } from 'framer-motion';
 
@@ -10,82 +10,76 @@ const memberImages = import.meta.glob("../assets/members/*.{png,jpg,jpeg,webp}",
   import: "default",
 });
 
-const enquirySubject = "Project Enquiry";
-const enquiryBody =
-  "Hello, I am interested in your service. Please contact me.";
-const createMailLink = (email) =>
-  `mailto:${email}?subject=${encodeURIComponent(enquirySubject)}&body=${encodeURIComponent(enquiryBody)}`;
-
 const members = [
   {
     name: "Nithish Kumar",
-    role: "Poster Design",
-    phone: "+917639077992",
-    email: "nithish@example.com",
+    role: "Poster Design & Logo Design",
     image: memberImages["../assets/members/Nithish.png"],
+    description:
+      "Creates clean, eye-catching poster designs with strong visuals, clear messaging, and a polished brand feel.",
   },
   {
     name: "Raja Lakshmanan",
-    role: "Website Development",
-    phone: "+917639077992",
-    email: "rajalakshmanan807@gmail.com",
+    role: "Website Design & Development",
     image: memberImages["../assets/members/raja.png"],
+    description:
+      "Passionate about building modern web experiences with a focus on performance, creativity, and user-friendly design.",
   },
   {
     name: "Sarvesh",
-    role: "Video Editing",
-    phone: "+917639077992",
-    email: "sarvesh@example.com",
+    role: "Video Editing & UI/UX Design",
     image: memberImages["../assets/members/sarvesh.png"],
+    description:
+      "Combining creative video editing with intuitive UI/UX design to deliver visually engaging content and user-friendly digital experiences.",
   },
   {
     name: "Dharun",
     role: "Video Editing",
-    phone: "+919342253612",
-    email: "mdharun8105@gmail.com",
     image: memberImages["../assets/members/dharun.png"],
+    description:
+      "Focuses on sharp video edits, engaging cuts, and refined presentation for reels, project demos, and brand content.",
   },
   {
     name: "Abishek",
     role: "Design & Development",
-    phone: "+919080253991",
-    email: "gabishekkumar2007@gmail.com",
     image: memberImages["../assets/members/abi.png"],
+    description:
+      "Combines design thinking and development skills to create practical, attractive, and reliable digital solutions.",
   },
   {
     name: "Harshath Roshan",
-    role: "Video Editing",
-    phone: "+917639077992",
-    email: "Roshan@example.com",
+    role: "Video Editing & UI/UX Design",
     image: memberImages["../assets/members/roshan.png"],
+    description:
+      "Crafts polished video content with attention to rhythm, clarity, and a professional finish for modern platforms.",
   },
   {
     name: "Sasmitha",
     role: "PCB Design & Assignment Writing",
-    phone: "+918190018720",
-    email: "sasmithaprakash1984@gmail.com",
     image: memberImages["../assets/members/sas.png"],
+    description:
+      "Supports PCB design and academic writing with careful formatting, organized structure, and detail-focused execution.",
   },
   {
     name: "Radha Krishnan",
-    role: "PCB Design & Assignment Writing",
-    phone: "+918190018720",
-    email: "sasmithaprakash1984@gmail.com",
+    role: "Poster Design & Logo Design",
     image: memberImages["../assets/members/radha.png"],
+    description:
+      "Creative poster and logo designs that capture attention, strengthen brand identity, and communicate ideas with a modern visual style.",
   },
   {
     name: "Niranjana",
-    role: "PCB Design & Assignment Writing",
-    phone: "+918190018720",
-    email: "sasmithaprakash1984@gmail.com",
+    role: "Poster Design & Logo Design",
     image: memberImages["../assets/members/nir.png"],
+    description:
+      "Creating eye-catching posters and unique logos that enhance brand identity and communicate ideas with creativity and professionalism.",
   },
 ];
 
 const googleFormLink = "https://forms.gle/F2semvxttVkhPqy58";
 
 const aboutIntro =
-  "At Synclance, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.";
+  "At Luminotrix, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -137,16 +131,16 @@ const About = () => {
               <div className="member-details">
                 <h3 className="member-name">{member.name}</h3>
                 <p className="member-role">{member.role}</p>
-                <div className="member-contact">
-                  <a className="member-link" href={`tel:${member.phone}`} aria-label={`Call ${member.name}`}>
-                    <FiPhone />
-                    <span>{member.phone}</span>
-                  </a>
-                  <a className="member-link" href={createMailLink(member.email)} aria-label={`Email ${member.name}`}>
-                    <FiMail />
-                    <span>{member.email}</span>
-                  </a>
-                </div>
+                <motion.div
+                  className="member-description"
+                  initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
+                  whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                >
+                  <span>Description</span>
+                  <p>{member.description}</p>
+                </motion.div>
               </div>
             </motion.article>
           ))}

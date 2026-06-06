@@ -56,8 +56,8 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <a href="#home" className="footer-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
-            <img src={logo} alt="Synclance Logo" />
-            <span>Synclance</span>
+            <img src={logo} alt="Luminotrix Logo" />
+            <span>Luminotrix</span>
           </a>
           <p>Creative Tech & Design Solutions</p>
           <div className="footer-socials" aria-label="Social and contact links">
@@ -101,7 +101,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>© 2026 Synclance. All rights reserved.</p>
+        <p>© 2026 Luminotrix. All rights reserved.</p>
       </div>
     </motion.footer>
   );

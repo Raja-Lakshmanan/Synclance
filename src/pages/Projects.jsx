@@ -45,7 +45,7 @@ const servicesData = [
 const categories = ["All", "Design", "Projects", "Development", "Editing"];
 
 const projectIntro =
-  "At Synclance, we combine creativity, engineering, and technology to deliver high-quality solutions for students, creators, startups, and businesses. We help you turn ideas into reality with precision, professionalism, and powerful design.";
+  "At Luminotrix, we combine creativity, engineering, and technology to deliver high-quality solutions for students, creators, startups, and businesses. We help you turn ideas into reality with precision, professionalism, and powerful design.";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
