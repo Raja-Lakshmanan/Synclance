@@ -5,6 +5,7 @@ import logo from "./l1.png";
 import design1 from "../../assets/design/design1.png";
 import SoundToggle from "../sound/SoundToggle";
 import { playUiSound } from "../../utils/sound";
+import { motion } from "framer-motion";
 
 const navLinks = [
   { href: "#home", label: "Home", id: "home" },
@@ -17,40 +18,91 @@ const navLinks = [
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredSection, setHoveredSection] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const navHeight = window.innerWidth <= 980 ? 72 : 86;
-      const offset = navHeight + 40;
-      const scrollPosition = window.scrollY - offset;
-      const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-      let current = "home";
-
-      navLinks.forEach((link) => {
-        const section = document.getElementById(link.id);
-        if (!section) return;
-
-        if (scrollPosition >= section.offsetTop) {
-          current = link.id;
-        }
-      });
-
-      if (pageBottom) {
-        current = navLinks[navLinks.length - 1].id;
-      }
-
-      setActiveSection(current);
+      setIsScrolled(window.scrollY > 20);
     };
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    window.addEventListener("hashchange", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      window.removeEventListener("hashchange", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const sectionElements = navLinks
+      .map((link) => document.getElementById(link.id))
+      .filter(Boolean);
+    const intersectionStates = new Map();
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        intersectionStates.set(entry.target.id, {
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio,
+          boundingClientRect: entry.boundingClientRect,
+        });
+      });
+
+      // Check if we are at the very bottom of the page
+      const pageBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10;
+      if (pageBottom) {
+        setActiveSection(navLinks[navLinks.length - 1].id);
+        return;
+      }
+
+      let dominantSectionId = null;
+      let maxIntersectionRatio = -1;
+      let minTopDistance = Infinity;
+
+      for (const [id, state] of intersectionStates.entries()) {
+        if (state.isIntersecting) {
+          const topDist = Math.abs(state.boundingClientRect.top);
+          if (
+            state.intersectionRatio > maxIntersectionRatio ||
+            (state.intersectionRatio === maxIntersectionRatio &&
+              topDist < minTopDistance)
+          ) {
+            maxIntersectionRatio = state.intersectionRatio;
+            minTopDistance = topDist;
+            dominantSectionId = id;
+          }
+        }
+      }
+
+      if (dominantSectionId) {
+        setActiveSection(dominantSectionId);
+      }
+    };
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -25% 0px",
+      threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sectionElements.forEach((el) => observer.observe(el));
+
+    const handleScrollForBottom = () => {
+      const pageBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 10;
+      if (pageBottom) {
+        setActiveSection(navLinks[navLinks.length - 1].id);
+      }
+    };
+    window.addEventListener("scroll", handleScrollForBottom, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScrollForBottom);
     };
   }, []);
 
@@ -73,22 +125,39 @@ const Nav = () => {
 
   return (
     <>
-      <header className="aixor-nav">
+      <header className={`aixor-nav ${isScrolled ? "is-scrolled" : ""}`}>
         <a href="#home" className="aixor-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
           <img src={logo} alt="Luminotrix Logo" height="1000"/>
         </a>
 
-        <nav className="aixor-desktop-links">
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              className={activeSection === link.id ? "active" : ""}
-              onClick={() => playUiSound("click")}
-            >
-              {link.label}
-            </a>
-          ))}
+        <nav 
+          className="aixor-desktop-links"
+          onMouseLeave={() => setHoveredSection(null)}
+        >
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            const isHovered = hoveredSection === link.id;
+            const showUnderline = isHovered || (hoveredSection === null && isActive);
+
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                className={isActive ? "active" : ""}
+                onMouseEnter={() => setHoveredSection(link.id)}
+                onClick={() => playUiSound("click")}
+              >
+                {link.label}
+                {showUnderline && (
+                  <motion.span
+                    layoutId="nav-underline"
+                    className="nav-underline-line"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
         </nav>
 
         <div className="aixor-right">

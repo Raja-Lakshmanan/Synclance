@@ -1,28 +1,28 @@
-*{
+* {
   box-sizing: border-box;
 }
 
-:root{
-  --premium-ease: cubic-bezier(.2,.8,.2,1);
+:root {
+  --premium-ease: cubic-bezier(.2, .8, .2, 1);
   --hover-transition: transform 0.42s ease, box-shadow 0.42s ease, border-color 0.42s ease, background 0.42s ease, color 0.42s ease;
-  --premium-border: rgba(255,255,255,0.16);
-  --premium-border-strong: rgba(235,235,235,0.34);
-  --premium-glow: 0 22px 58px rgba(0,0,0,0.46), 0 0 24px rgba(210,210,210,0.075);
+  --premium-border: rgba(255, 255, 255, 0.16);
+  --premium-border-strong: rgba(235, 235, 235, 0.34);
+  --premium-glow: 0 22px 58px rgba(0, 0, 0, 0.46), 0 0 24px rgba(210, 210, 210, 0.075);
   --premium-glass:
-    linear-gradient(145deg, rgba(255,255,255,0.095), rgba(255,255,255,0.018)),
-    rgba(8,8,8,0.82);
+    linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.018)),
+    rgba(8, 8, 8, 0.82);
 }
 
-html{
+html {
   scroll-behavior: smooth;
-  scroll-padding-top: 20px;
+  /* scroll-padding-top: 20px; */
 }
 
-body{
+body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 50% 100%, rgba(255,255,255,0.04), transparent 34%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.04), transparent 34%),
     #050505;
   color: #f4f4f4;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -31,7 +31,7 @@ body{
 }
 
 body::before,
-body::after{
+body::after {
   content: "";
   position: fixed;
   inset: 0;
@@ -40,24 +40,24 @@ body::after{
   will-change: transform;
 }
 
-body::before{
+body::before {
   inset: -18%;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255,255,255,0.13), transparent 27%),
-    radial-gradient(circle at 82% 68%, rgba(192,192,192,0.095), transparent 34%),
-    radial-gradient(circle at 50% 100%, rgba(255,255,255,0.065), transparent 31%),
-    radial-gradient(circle at 58% 12%, rgba(255,255,255,0.045), transparent 24%);
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.13), transparent 27%),
+    radial-gradient(circle at 82% 68%, rgba(192, 192, 192, 0.095), transparent 34%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.065), transparent 31%),
+    radial-gradient(circle at 58% 12%, rgba(255, 255, 255, 0.045), transparent 24%);
   filter: blur(0.2px);
   opacity: 0.78;
   animation: premiumBgFloat 22s ease-in-out infinite alternate;
 }
 
-body::after{
+body::after {
   z-index: -1;
   background:
-    linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px),
-    linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.035) 45%, transparent 58%);
+    linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.035) 45%, transparent 58%);
   background-size: 72px 72px, 72px 72px, 100% 100%;
   background-position: 0 0, 0 0, 0 0;
   mask-image: radial-gradient(circle at center, #000 28%, transparent 74%);
@@ -67,26 +67,26 @@ body::after{
 }
 
 button,
-a{
+a {
   font: inherit;
 }
 
-button{
+button {
   letter-spacing: 0;
 }
 
-section{
+section {
   scroll-margin-top: 96px;
 }
 
-.reveal-section{
+.reveal-section {
   will-change: transform, opacity;
 }
 
-.glass-card{
+.glass-card {
   background: var(--premium-glass);
   border: 1px solid var(--premium-border);
-  box-shadow: 0 16px 42px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -101,7 +101,7 @@ button,
 .footer-socials a,
 .aixor-mail,
 .aixor-menu-btn,
-.agency-close-btn{
+.agency-close-btn {
   position: relative;
   overflow: hidden;
   transition:
@@ -119,14 +119,14 @@ button::before,
 .aixor-mail::before,
 .aixor-menu-btn::before,
 .agency-close-btn::before,
-.shine-hover::before{
+.shine-hover::before {
   content: "";
   position: absolute;
   top: 0;
   left: -130%;
   width: 68%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.24), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.24), transparent);
   transform: skewX(-20deg);
   transition: left 0.7s ease;
   pointer-events: none;
@@ -142,7 +142,7 @@ button:hover,
 .footer-socials a:hover,
 .aixor-mail:hover,
 .aixor-menu-btn:hover,
-.agency-close-btn:hover{
+.agency-close-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--premium-glow);
 }
@@ -158,7 +158,7 @@ button:hover::before,
 .aixor-mail:hover::before,
 .aixor-menu-btn:hover::before,
 .agency-close-btn:hover::before,
-.shine-hover:hover::before{
+.shine-hover:hover::before {
   left: 132%;
 }
 
@@ -167,47 +167,51 @@ button:active,
 .btn:active,
 .apply-btn:active,
 .category-btn:active,
-.floating-contact-main:active{
+.floating-contact-main:active {
   transform: translateY(-1px) scale(0.985);
 }
 
-@keyframes premiumBgFloat{
-  0%{
+@keyframes premiumBgFloat {
+  0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
-  50%{
+
+  50% {
     transform: translate3d(-24px, 18px, 0) scale(1.055);
   }
-  100%{
+
+  100% {
     transform: translate3d(22px, -18px, 0) scale(1.08);
   }
 }
 
-@keyframes premiumGridMove{
-  from{
+@keyframes premiumGridMove {
+  from {
     background-position: 0 0, 0 0, -120px 0;
   }
-  to{
+
+  to {
     background-position: 72px 72px, 72px 72px, 120px 0;
   }
 }
 
-@media (max-width: 768px){
-  html{
+@media (max-width: 768px) {
+  html {
     scroll-padding-top: 78px;
   }
 
-  section{
+  section {
     scroll-margin-top: 78px;
   }
 
-  body::before{
+  body::before {
     animation-duration: 20s;
     opacity: 0.78;
   }
 }
 
-@media (hover: none){
+@media (hover: none) {
+
   .premium-btn:hover,
   button:hover,
   .btn:hover,
@@ -218,15 +222,16 @@ button:active,
   .footer-socials a:hover,
   .aixor-mail:hover,
   .aixor-menu-btn:hover,
-  .agency-close-btn:hover{
+  .agency-close-btn:hover {
     transform: none;
   }
 }
 
-@media (prefers-reduced-motion: reduce){
+@media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
-  *::after{
+  *::after {
     animation: none !important;
     scroll-behavior: auto !important;
     transition: none !important;

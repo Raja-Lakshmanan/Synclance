@@ -3,10 +3,10 @@ import { useRef } from "react";
 import "./ScrollRevealText.css";
 
 const ScrollWord = ({ index, progress, total, word }) => {
-  const start = index / total;
-  const end = (index + 1) / total;
-  const color = useTransform(progress, [start, end], ["#555", "#fff"]);
-  const opacity = useTransform(progress, [start, end], [0.35, 1]);
+  const start = Math.max(0, (index - 1.5) / total);
+  const end = Math.min(1, (index + 2) / total);
+  const color = useTransform(progress, [start, end], ["#4f4f4f", "#ffffff"]);
+  const opacity = useTransform(progress, [start, end], [0.28, 1]);
 
   return (
     <motion.span style={{ color, opacity }} className="scroll-word">

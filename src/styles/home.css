@@ -6,8 +6,21 @@
 .home{
     position: relative;
     min-height: 100vh;
+    height: 100vh;
     overflow: hidden;
     isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(80px, 12vh, 140px) 4% clamp(40px, 8vh, 80px);
+}
+
+.home-top {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    z-index: 1;
 }
 .home::after{
     content: "";
@@ -34,9 +47,8 @@
     will-change: transform, opacity;
 }
 .type{
-    margin-left: 4%;
-    position: absolute;
-    top: 25%;
+    position: relative;
+    margin-left: 0;
     z-index: 1;
 }
 .vi{
@@ -54,29 +66,24 @@
 }
 
 .para{
-    /* background: linear-gradient(90deg,white, darkgray , whitesmoke , gray); */
-    /* -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2)); */
-    /* -webkit-background-clip: text; */
-    /* -webkit-text-fill-color: transparent; */
     color: #c7c7c7;
     font-weight: 500;
     font-family: inherit;
     width: min(550px, 88vw);
     font-size: 15px;
     line-height: 1.7;
-    position: absolute;
-    top: 33%;
-    margin-left: 4%;
+    position: relative;
+    margin-left: 0;
     z-index: 1;
     text-shadow: 0 1px 20px rgba(0,0,0,0.72);
 }
 .ceo{
-    position: absolute;
-    top: 60%;
-    margin-left: 4%;
+    position: relative;
+    margin-left: 0;
     color: white;
     font-size: 16px;
     z-index: 1;
+    display: none;
 }
 .c1{
     font-style: italic;
@@ -87,14 +94,21 @@
     font-size: 16px;
     font-family: inherit;
 }
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
 .quotes{
     background: linear-gradient(90deg,white, darkgray, #f7f7f7, silver); 
     -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    position: absolute;
-    top: 70%;
-    margin-left: 4%;
+    position: relative;
+    margin-left: 0;
     color: white;
     line-height: 1;
     z-index: 1;
@@ -112,10 +126,12 @@
     font-weight: 400;
 }
 .btn{
-    position: absolute;
-    top: 90%;
-    right: 2%;
-    margin-left: 4%;
+    position: relative;
+    margin-left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     padding: 12px 22px;
     font-size: 16px;
     font-weight: 500;
@@ -126,7 +142,8 @@
     border: 1px solid rgba(255,255,255,0.72);
     border-radius: 999px;
     cursor: pointer;
-    transition: background 0.5s, color 0.5s, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     backdrop-filter: blur(10px);
     box-shadow: 0 14px 35px rgba(0,0,0,0.28);
     z-index: 1;
@@ -135,13 +152,17 @@
     margin-left: 8px;
     vertical-align: middle;
     font-size: 22px;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn:hover{
     background: white;
     color: black;
     border-color: white;
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     box-shadow: 0 18px 45px rgba(255,255,255,0.12), 0 14px 35px rgba(0,0,0,0.3);
+}
+.btn:hover .arrow{
+    transform: translate(5px, -5px);
 }
 
 @keyframes heroLightSweep{
@@ -158,6 +179,7 @@
 @media (max-width: 768px){
     .home{
         min-height: auto;
+        height: auto;
         padding: 112px 6% 56px;
         display: flex;
         flex-direction: column;

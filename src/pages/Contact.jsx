@@ -40,19 +40,19 @@ const contactCards = [
 ]
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 24, filter: 'blur(4px)' },
   visible: {
     opacity: 1,
     y: 0,
     filter: 'blur(0px)',
-    transition: { duration: 0.7, ease: 'easeOut' },
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
   },
 }
 
 const staggerWrap = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
   },
 }
 
@@ -125,6 +125,7 @@ const Contact = () => {
                 target={card.href.startsWith('http') ? '_blank' : undefined}
                 rel={card.href.startsWith('http') ? 'noreferrer' : undefined}
                 variants={fadeUp}
+                whileHover={{ y: -5, scale: 1.015 }}
                 onClick={() => playUiSound('click')}
               >
                 <span className='contact-card-icon'>{card.icon}</span>

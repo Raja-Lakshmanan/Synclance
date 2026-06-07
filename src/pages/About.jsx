@@ -82,17 +82,25 @@ const aboutIntro =
   "At Luminotrix, our team is a blend of creative designers, skilled developers, and passionate engineers who come together to deliver powerful solutions. We work with dedication, innovation, and attention to detail to turn ideas into reality.";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.85,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
 };
 
 const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12
-    }
-  }
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
 };
 
 const About = () => {
@@ -100,10 +108,10 @@ const About = () => {
     <section className='about' id='about'>
       <motion.div
         className='first'
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
         <h2><RiTeamLine className='sicon'/> Our Members</h2>
         <div className='scrollpar'><ScrollRevealText text={aboutIntro} /></div>
@@ -115,15 +123,15 @@ const About = () => {
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           {members.map((member) => (
             <motion.article
               className="member-card"
               key={member.name}
               variants={fadeUp}
-              transition={{ duration: 0.62, ease: "easeOut" }}
-              whileHover={{ y: -6, scale: 1.01 }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -6, scale: 1.015 }}
             >
               <div className="member-image-wrap">
                 <img className="member-image" src={member.image} alt={member.name} />
@@ -135,8 +143,8 @@ const About = () => {
                   className="member-description"
                   initial={{ opacity: 0, y: 8, filter: "blur(3px)" }}
                   whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <span>Description</span>
                   <p>{member.description}</p>
@@ -148,8 +156,8 @@ const About = () => {
           <motion.article
             className="member-card apply-member-card"
             variants={fadeUp}
-            transition={{ duration: 0.62, ease: "easeOut" }}
-            whileHover={{ y: -6, scale: 1.01 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ y: -6, scale: 1.015 }}
           >
             <div className="apply-plus" aria-hidden="true">
               <FiPlus />

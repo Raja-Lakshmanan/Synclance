@@ -2,20 +2,20 @@ import { Typewriter } from 'react-simple-typewriter';
 import './type.css'
 const TypingText = () => {
   return (
-    <div className='type'>
-      <h1 className='dev'>LUMINOTRIX :&nbsp;{' '}</h1>
-      <h1 className='dev'>
+    <>
+      <span className='dev'>LUMINOTRIX :&nbsp;{' '}</span>
+      <span className='dev'>
         <Typewriter
           words={['Creative Tech', 'Design Solutions', 'Innovative Ideas']}
           loop={0}
           cursor={true}
-          cursorStyle=''
-          typeSpeed={30}
-          deleteSpeed={10}
-          delaySpeed={1000}
+          cursorStyle='|'
+          typeSpeed={60}
+          deleteSpeed={30}
+          delaySpeed={2000}
         />
-      </h1>
-    </div>
+      </span>
+    </>
   );
 };
 

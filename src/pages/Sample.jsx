@@ -76,15 +76,19 @@ const editingSamples = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 const staggerGroup = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
       delayChildren: 0.08,
     },
   },
@@ -95,28 +99,54 @@ const cardRise = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.58, ease: "easeOut" },
+    transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
 const posterSlide = {
   enter: (direction) => ({
     opacity: 0,
-    x: direction > 0 ? 72 : -72,
-    scale: 0.985,
+    x: direction > 0 ? 50 : -50,
+    scale: 0.97,
   }),
   center: {
     opacity: 1,
     x: 0,
     scale: 1,
-    transition: { duration: 0.42, ease: "easeOut" },
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
   },
   exit: (direction) => ({
     opacity: 0,
-    x: direction > 0 ? -72 : 72,
-    scale: 0.985,
-    transition: { duration: 0.32, ease: "easeIn" },
+    x: direction > 0 ? -50 : 50,
+    scale: 0.97,
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   }),
+};
+
+const IframePreview = ({ url, title }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  return (
+    <div className="website-iframe-wrapper" style={{ position: "relative", width: "100%", height: "100%" }}>
+      {!isLoaded && (
+        <div className="iframe-skeleton">
+          <div className="iframe-skeleton-glow" />
+          <span>Loading live preview...</span>
+        </div>
+      )}
+      <iframe
+        src={url}
+        title={title}
+        loading="lazy"
+        referrerPolicy="strict-origin-when-cross-origin"
+        onLoad={() => setIsLoaded(true)}
+        style={{
+          opacity: isLoaded ? 1 : 0,
+          transition: "opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      />
+    </div>
+  );
 };
 
 const MediaFallback = ({ label }) => (
@@ -133,7 +163,8 @@ const PhotoPreview = ({ photo, title, onOpen }) => (
     aria-label={`Open ${title} image preview`}
     disabled={!photo}
     onClick={() => onOpen({ type: "image", src: photo, title })}
-    whileHover={{ y: -3 }}
+    whileHover={{ y: -4, scale: 1.015 }}
+    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
   >
     {photo ? (
       <img src={photo} alt={`${title} project preview`} loading="lazy" />
@@ -150,7 +181,8 @@ const VideoPreview = ({ video, title, onOpen }) => (
     aria-label={`Open ${title} video preview`}
     disabled={!video}
     onClick={() => onOpen({ type: "video", src: video, title })}
-    whileHover={{ y: -3 }}
+    whileHover={{ y: -4, scale: 1.015 }}
+    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
   >
     {video ? (
       <video muted preload="metadata" playsInline aria-hidden="true">
@@ -190,10 +222,10 @@ const MediaLightbox = ({ media, onClose }) => {
       role="dialog"
       aria-modal="true"
       aria-label={`${media.title} ${media.type} preview`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.24, ease: "easeOut" }}
+      initial={{ opacity: 0, backdropFilter: "blur(0px)", WebkitBackdropFilter: "blur(0px)" }}
+      animate={{ opacity: 1, backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)" }}
+      exit={{ opacity: 0, backdropFilter: "blur(0px)", WebkitBackdropFilter: "blur(0px)" }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       onClick={closeLightbox}
     >
       <button
@@ -207,16 +239,16 @@ const MediaLightbox = ({ media, onClose }) => {
 
       <motion.div
         className="sample-lightbox-panel"
-        initial={{ opacity: 0, y: 24, scale: 0.96 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 18, scale: 0.97 }}
-        transition={{ duration: 0.34, ease: "easeOut" }}
+        initial={{ opacity: 0, scale: 0.93, y: 15 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 10 }}
+        transition={{ type: "spring", stiffness: 350, damping: 28 }}
         onClick={(event) => event.stopPropagation()}
       >
         {media.type === "image" ? (
           <img src={media.src} alt={`${media.title} enlarged preview`} />
         ) : (
-          <video ref={modalVideoRef} controls preload="metadata" playsInline>
+          <video ref={modalVideoRef} controls preload="metadata" playsInline autoPlay>
             <source src={media.src} />
             Your browser does not support the video preview.
           </video>
@@ -286,18 +318,18 @@ const Sample = () => {
           <p className="sample-kicker">Selected work</p>
           <motion.h2
             className="sample-title"
-            initial={{ opacity: 0, y: 26 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.72, delay: 0.08, ease: "easeOut" }}
+            transition={{ duration: 0.95, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           >
             Sample Portfolio
           </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.62, delay: 0.16, ease: "easeOut" }}
+            transition={{ duration: 0.85, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
           >
             Completed websites, engineering projects, poster-ready visuals, and edited video
             samples presented in one polished showcase.
@@ -325,7 +357,7 @@ const Sample = () => {
                 className="website-card"
                 key={website.title}
                 variants={cardRise}
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -6, scale: 1.015 }}
               >
                 <div className="website-browser">
                   <div className="website-browser-bar" aria-hidden="true">
@@ -333,11 +365,9 @@ const Sample = () => {
                     <span />
                     <span />
                   </div>
-                  <iframe
-                    src={website.url}
+                  <IframePreview
+                    url={website.url}
                     title={`${website.title} live website preview`}
-                    loading="lazy"
-                    referrerPolicy="strict-origin-when-cross-origin"
                   />
                 </div>
 
@@ -383,7 +413,7 @@ const Sample = () => {
                 className="project-sample-card"
                 key={project.title}
                 variants={cardRise}
-                whileHover={{ y: -7 }}
+                whileHover={{ y: -7, scale: 1.015 }}
               >
                 <div className="project-card-top">
                   <span>{project.category}</span>
@@ -507,9 +537,9 @@ const Sample = () => {
                   variants={fadeUp}
                   initial="hidden"
                   whileInView="visible"
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -5, scale: 1.012 }}
                   viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+                  transition={{ duration: 0.75, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <VideoPreview
                     video={sample.video}

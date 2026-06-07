@@ -1,42 +1,42 @@
 .type{
-    color: white;
-    display: flex;
-    height: 50vh;
-    font-size: clamp(7px, 1vw, 10px);
-    align-items: flex-start;
-    flex-wrap: wrap;
-    max-width: 92vw;
-    gap: 6px;
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 92vw;
+  gap: 6px;
+  font-size: clamp(32px, 3.8vw, 54px);
+  line-height: 1.15;
 }
 .dev{
-    background: linear-gradient(90deg,white, darkgray , whitesmoke , gray, white);
-    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 500;
-    font-family: inherit;
-    font-style: italic;
-    letter-spacing: 0;
-    background-size: 200% 200%;
-    animation: waveMove 3s linear infinite;
+  background: linear-gradient(90deg,white, darkgray , whitesmoke , gray, white);
+  -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, rgba(255, 255, 255, 0.2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 500;
+  font-family: inherit;
+  font-style: italic;
+  letter-spacing: 0;
+  background-size: 200% 200%;
+  animation: waveMove 3s linear infinite;
 }
 @keyframes waveMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
+0% {
+  background-position: 0% 50%;
+}
+100% {
+  background-position: 200% 50%;
+}
 }
 
 @media (max-width: 768px){
-  .type{
-    height: auto;
-    font-size: clamp(7px, 2.4vw, 10px);
-    line-height: 1.2;
-    max-width: 100%;
-  }
-  .dev{
-    -webkit-box-reflect: unset;
-  }
+.type{
+  height: auto;
+  font-size: clamp(24px, 5.5vw, 36px);
+  line-height: 1.2;
+  max-width: 100%;
+}
+.dev{
+  -webkit-box-reflect: unset;
+}
 }
