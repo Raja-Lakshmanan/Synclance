@@ -56,7 +56,7 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <a href="#home" className="footer-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
-            <img src={logo} alt="Luminotrix Logo" />
+            <img src={logo} alt="Luminotrix Logo - Creative Tech & Design Solutions" />
             <span>Luminotrix</span>
           </a>
           <p>Creative Tech & Design Solutions</p>

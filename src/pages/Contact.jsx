@@ -100,10 +100,29 @@ const Contact = () => {
       viewport={{ once: true, amount: 0.18 }}
       variants={staggerWrap}
     >
+      <style dangerouslySetInnerHTML={{__html: `
+        .contact-heading-h2 {
+          margin: 0;
+          width: fit-content;
+          background: linear-gradient(90deg, #ffffff, #a9a9a9, #f4f4f4);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          font-size: clamp(46px, 7vw, 86px);
+          font-weight: 500;
+          line-height: 0.95;
+          letter-spacing: 0;
+        }
+        @media (max-width: 620px) {
+          .contact-heading-h2 {
+            font-size: clamp(42px, 14vw, 66px);
+          }
+        }
+      `}} />
       <div className='contact-shell'>
         <motion.div className='contact-heading' variants={fadeUp}>
           <span className='contact-kicker'>Contact</span>
-          <h1>GET IN TOUCH</h1>
+          <h2 className="contact-heading-h2">GET IN TOUCH</h2>
           <p>
             Let us know what you want to build, design, edit, or present. We will help you shape it with clean execution and a professional finish.
           </p>
@@ -161,39 +180,46 @@ const Contact = () => {
             )}
 
             <div className='contact-fields'>
-              <label>
+              <label htmlFor="contact-name">
                 <span>Name</span>
                 <input
+                  id="contact-name"
                   type='text'
                   name='name'
                   placeholder='Your name'
                   required
+                  aria-required="true"
                 />
               </label>
-              <label>
+              <label htmlFor="contact-email">
                 <span>Email</span>
                 <input
+                  id="contact-email"
                   type='email'
                   name='email'
                   placeholder='you@example.com'
                   required
+                  aria-required="true"
                 />
               </label>
-              <label>
+              <label htmlFor="contact-phone">
                 <span>Phone</span>
                 <input
+                  id="contact-phone"
                   type='tel'
                   name='phone'
                   placeholder='+91'
                 />
               </label>
-              <label className='message-field'>
+              <label className='message-field' htmlFor="contact-message">
                 <span>Message</span>
                 <textarea
+                  id="contact-message"
                   name='message'
                   placeholder='Tell us what you need'
                   rows='5'
                   required
+                  aria-required="true"
                 />
               </label>
             </div>

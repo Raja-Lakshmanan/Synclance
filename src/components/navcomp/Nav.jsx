@@ -127,7 +127,7 @@ const Nav = () => {
     <>
       <header className={`aixor-nav ${isScrolled ? "is-scrolled" : ""}`}>
         <a href="#home" className="aixor-logo" aria-label="Go to home" onClick={() => playUiSound("click")}>
-          <img src={logo} alt="Luminotrix Logo" height="1000"/>
+          <img src={logo} alt="Luminotrix Logo - Creative Tech & Design Solutions" height="1000"/>
         </a>
 
         <nav 
@@ -191,7 +191,7 @@ const Nav = () => {
       {isOpen && (
         <div className="agency-mobile-menu" role="dialog" aria-modal="true">
           <div className="agency-mobile-top">
-            <img src={logo} alt="Luminotrix Logo" />
+            <img src={logo} alt="Luminotrix Logo - Creative Tech & Design Solutions" />
             <button
               className="agency-close-btn"
               onClick={closeMenu}
@@ -201,7 +201,7 @@ const Nav = () => {
             </button>
           </div>
 
-          <img src={design1} className="agency-menu-visual" alt="Design visual" />
+          <img src={design1} className="agency-menu-visual" alt="Creative Tech Design Visual" />
 
           <div className="agency-mobile-links">
             {navLinks.map((link, index) => (

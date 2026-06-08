@@ -8,11 +8,14 @@ import Sample from './pages/Sample'
 import FloatingContact from './components/FloatingContact/FloatingContact'
 import Footer from './components/footer/Footer'
 import CustomCursor from './components/cursor/CustomCursor'
+import SEO from './components/SEO'
 import { MotionConfig } from 'framer-motion'
+
 const App = () => {
   return (
     <MotionConfig reducedMotion="user">
       <div className='app'>
+        <SEO />
         <CustomCursor />
         <Nav />
         <main className='app-main'>
@@ -29,4 +32,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App

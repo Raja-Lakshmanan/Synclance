@@ -345,8 +345,8 @@ const Projects = () => {
         <div className="scrollpar"><ScrollRevealText text={projectIntro} /></div>
       </div>
       <br />
-      <h1 className='h'>What We Do</h1><br />
-      <div className="category-buttons">
+      <h2 className='h'>What We Do</h2><br />
+      <div className="category-buttons" aria-label="Services categories">
         {categories.map((cat) => (
           <button
             key={cat}
@@ -355,6 +355,8 @@ const Projects = () => {
             }`}
             onClick={() => handleCategoryChange(cat)}
             style={{ position: 'relative' }}
+            aria-pressed={activeCategory === cat}
+            aria-label={`Filter services by ${cat}`}
           >
             <span style={{ position: 'relative', zIndex: 2 }}>{cat}</span>
             {activeCategory === cat && (
@@ -374,6 +376,7 @@ const Projects = () => {
           </button>
         ))}
       </div>
+
       <motion.div
         layout
         className="services-grid"

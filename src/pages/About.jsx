@@ -134,7 +134,7 @@ const About = () => {
               whileHover={{ y: -6, scale: 1.015 }}
             >
               <div className="member-image-wrap">
-                <img className="member-image" src={member.image} alt={member.name} />
+                <img className="member-image" src={member.image} alt={`Portrait of ${member.name}, ${member.role} at Luminotrix`} />
               </div>
               <div className="member-details">
                 <h3 className="member-name">{member.name}</h3>
@@ -170,6 +170,7 @@ const About = () => {
                 href={googleFormLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Apply to become a member of Luminotrix"
               >
                 Apply
               </a>
